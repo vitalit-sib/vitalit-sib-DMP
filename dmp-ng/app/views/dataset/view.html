@@ -1,0 +1,231 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class = 'container-fluid' nv-file-drop="" uploader="vm.uploader">
+	<div class = 'container' >
+
+		<div class = 'panel panel-default'>
+			<div class = 'panel-heading'>
+				<div class = 'panel-title'>
+					{{vm.dataset.name}}
+					<button class = 'btn btn-xs btn-primary pull-right' ng-click = 'vm.editExperiment()' ng-if = 'vm.dataset.logged_permission == 2'>edit</button>
+				</div>
+			</div>
+			<div class = 'panel-body'>
+				<fieldset>
+					<legend>Name and description</legend>
+					<dl class = 'dl-horizontal'>
+						<dt>Name</dt>
+						<dd>{{vm.dataset.name}}</dd>
+						<dt>Description</dt>
+						<dd>{{vm.dataset.description}}</dd>
+					</dl>
+				</fieldset>
+				<fieldset>
+					<legend>Ownership and permissions</legend>
+					<dl class = 'dl-horizontal'>
+						<dt>Owner</dt>
+						<dd>{{vm.dataset.user_name}}</dd>
+						<dt>Group</dt>
+						<dd>{{vm.dataset.group_name}} <i class = 'pull-right'>permission: {{vm.permissions[vm.dataset.group_permissions]}}</i></dd>
+						<dt>Project</dt>
+						<dd>{{vm.dataset.project_name}} <i class = 'pull-right'>permission: {{vm.permissions[vm.dataset.project_permissions]}}</i></dd>
+						<dt>Public</dt>
+						<dd> <i class = 'pull-right'>permission: {{vm.permissions[vm.dataset.public_permissions]}}</i></dd>
+						<dt>File downloads</dt>
+						<dd>{{(vm.dataset.request_download == "Y") ? "only upon request and acceptance by file owner" : "immediate download"}}</dd>
+					</dl>
+				</fieldset>
+			</div>
+		</div>
+
+	</div>
+	<div class="panel panel-default" >
+		<div class="panel-heading" >
+			<div class="panel-title" >
+				Files
+				<button class = 'btn btn-primary btn-xs pull-right' ng-if = 'vm.dataset.logged_permission == 2' ng-show = '!vm.showUpload' ng-click = 'vm.showUpload = !vm.showUpload'>upload</span>
+			</div>
+		</div>
+		<div class = 'panel-body' ng-show = 'vm.showUpload'>
+
+			<div class="row">
+
+                <div class="col-md-3">
+
+                    <h5>drop files</h5>
+
+                    <div ng-show="vm.uploader.isHTML5">
+                        <div class="well my-drop-zone" nv-file-over="" uploader="vm.uploader">
+							Drop files here.
+                        </div>
+                    </div>
+
+					<h5>or</h5>
+					<input type="file" nv-file-select="" uploader="vm.uploader" multiple  />
+                </div>
+
+                <div class="col-md-9" style="margin-bottom: 40px">
+
+                    <h5>Upload queue</h5>
+                    <p>Queue length: {{ vm.uploader.queue.length }}</p>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th ng-show="vm.uploader.isHTML5">Size</th>
+                                <th ng-show="vm.uploader.isHTML5">Progress</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.uploader.queue">
+                                <td><strong>{{ item.file.name }}</strong></td>
+                                <td ng-show="vm.uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="vm.uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <div>
+                            Queue progress:
+                            <div class="progress" style="">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': vm.uploader.progress + '%' }"></div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="vm.uploader.uploadAll()" ng-disabled="!vm.uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> Upload all
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm" ng-click="vm.uploader.cancelAll()" ng-disabled="!vm.uploader.isUploading">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" ng-click="vm.uploader.clearQueue()" ng-disabled="!vm.uploader.queue.length">
+                            <span class="glyphicon glyphicon-trash"></span> Remove all
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" ng-click="vm.uploader.clearQueue(); vm.showUpload = false;">
+                            <span class="glyphicon glyphicon-list-alt"></span> Back to file list
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+		</div>
+		<div class = 'panel-body' ng-if = 'vm.dataset.readme' ng-bind-html = 'vm.dataset.readme'  ng-show = '!vm.showUpload'></div>
+		<!-- <table class="table table-hover" ng-show = '!vm.showUpload'> -->
+			<table st-table="vm.dataset.displayed"  st-safe-src="vm.dataset.files" class="table table-hover" ng-show = '!vm.showUpload'>
+
+			<thead>
+				<tr>
+					<th></th>
+					<th st-sort="file_name">Name</th>
+					<th st-sort="Owner">Owner</th>
+					<th st-sort="Date">Date</th>
+					<th st-sort="Type">Type</th>
+					<th st-sort="Size">Size</th>
+					<th class="text-center">Action</th>
+				</tr>
+				<tr>
+					<th colspan="7"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if = '!vm.dataset.files ||vm.dataset.files.length==0'>
+					<td colspan = '6' class = 'text-muted text-center'>no file in this dataset</td>
+				</tr>
+				<tr ng-repeat = 'file in vm.dataset.displayed track by $index' ng-style="{'background-color':(file.checked==true)?'lightgray':'#FFFFFF'}" >
+					<td> <input type="checkbox" aria-label="checkbox" ng-model="file.selected" ng-click = 'vm.toggleFile(file.file_id)'></td>
+					<td>{{file.name}}</td>
+					<td>{{file.user_name}}</td>
+					<td>{{file.timestamp}}</td>
+					<td>{{file.mime_type|formatMimeType}}</td>
+					<td>{{file.size}}</td>
+					<td class="viewdatatr">
+						<span ng-if = 'file.delete!="w"'>
+
+							<button class = 'btn btn-xs btn-default' ng-disabled = 'vm.dataset.logged_permission < 2 || vm.wait' ng-click='vm.viewFile(file.file_id,file.access_code,$index,file.mime_type,file.name)'><span class = 'glyphicon glyphicon-eye-open' ng-if="!vm.wait"></span><span class="glyphicon glyphicon-refresh" ng-if="vm.wait" ></span>
+							</button>
+							<button class = 'btn btn-xs' ng-class = '{"Y":"btn-warning","R":"btn-danger","N": "btn-info","P":"btn-warning"}[vm.dataset.logged_request_download]' ng-click = 'vm.download(file.file_id)'><span class = 'glyphicon' ng-class = '{"Y":"glyphicon-download-alt","R":"glyphicon-ban-circle","N": "glyphicon-download-alt","P":"glyphicon-time"}[vm.dataset.logged_request_download]'></span></button>
+							<button class = 'btn btn-danger btn-xs' ng-if = 'vm.dataset.logged_permission >= 2' ng-click = 'file.delete = "w"'><span class = 'glyphicon glyphicon-remove-circle'></span></button>
+
+
+  							<button class="btn btn-xs btn-default" clipboard text="vm.dataset.files[$index].url" on-copied="vm.success(file.name)"  on-error="vm.fail(file.name)" ng-click='vm.geturl(file.file_id,file.access_code,$index,file.name)' ng-class="(vm.dataset.files[$index].highlight)?'btn-success':'btn-default'" popover-placement="left" uib-popover="{{vm.url}}/download/{{vm.dataset.dataset_id}}/{{file.file_id}}/{{file.access_code}}/{{file.name}}" popover-class="popoverurl" uib-tooltip="copy URL to clipboard"  popover-trigger = 'outsideClick' ng-disabled ="!file.access_code" popover-is-open="vm.dataset.files[$index].highlight"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+  </button>
+
+						</span>
+						<span ng-if = 'file.delete=="w"'>
+							<button class = 'btn btn-xs btn-danger' ng-click = 'vm.deleteFile(file.file_id)' >confirm</button>
+							<a class = 'btn-link text-muted' ng-click = 'file.delete=""'><span class = 'glyphicon glyphicon-remove-circle'> </span></a>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot ng-show="vm.itemsByPages < vm.dataset.files.length">
+			 	<tr>
+					<td colspan="8" class="text-center" class="text-center">
+						<div st-template="views/dataset/pagination.html" st-pagination="" 	st-items-by-page="vm.itemsByPages"></div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<div class = 'panel-footer' ng-show = '!vm.showUpload' ng-if = 'vm.dataset.files.length > 0'>
+			<button type = 'button' class = 'btn btn-sm' ng-class = '{"Y":"btn-warning","R":"btn-danger","N": "btn-info","P":"btn-warning"}[vm.dataset.logged_request_download]' ng-click = 'vm.download("all")'><span class = 'glyphicon ' ng-class = '{"Y":"glyphicon-download-alt","R":"glyphicon-ban-circle","N": "glyphicon-download-alt","P":"glyphicon-time"}[vm.dataset.logged_request_download]' ></span> download all files</button>
+
+			<button type="button" class="btn btn-default btn-sm"  ng-click= "vm.download()" ng-if="(vm.dataset.files|filter:{selected:true}).length > 0">download  {{(vm.dataset.files|filter:{selected:true}).length}} selected files </button>
+
+			<select  class="form-control pull-right"  ng-model="vm.itemsByPages" ng-options="nb for nb in vm.itemsValue" style="margin-left:5px;width: 45px" >
+			</select>
+
+		</div>
+
+
+	</div>
+
+	<p class = 'text-center'  ng-show = '!vm.showUpload ' ng-if = 'vm.dataset.logged_permission == 2'>
+		<button type = 'button' class = 'btn btn-sm btn-danger' ng-click = 'vm.deleteExperiment()'>{{(vm.confirmDeletion)?"Confirm deletion":"Delete"}} </button>
+		<a class = 'btn-link' ng-click = 'vm.confirmDeletion=false' ng-show = 'vm.confirmDeletion'>Cancel</a>
+		<a href = '#/datasets' class = 'btn-link' ng-show = '!vm.confirmDeletion'>Back to dataset list</a>
+	</p>
+
+
+</div>

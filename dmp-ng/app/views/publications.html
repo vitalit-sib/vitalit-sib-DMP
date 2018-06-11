@@ -1,0 +1,136 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+<div class="container">
+	<h3 class="text-center" ng-show="vm.status=='display'" style="margin-bottom:0">
+		<button class="btn btn-default btn-sm pull-left" ng-click="vm.filters.$display=!vm.filters.$display" ng-class="(vm.filters.$display) ? 'active': ''" ng-show="vm.publications.length">Filter publications</button>
+		<span>
+			<span ng-show="vm.publications.length">{{vm.publications.length}}</span>
+			<span ng-show="!vm.publications.length">List of</span>
+			 publication<span ng-show="vm.publications.length>1">s</span> in {{vm.siteTitle.name}} 
+		 </span>
+		 <span class="fa fa-plus-circle pull-right pointer" uib-tooltip="add a publication" ng-click="vm.edit()"></span>
+		 <!-- <span class="fa fa-filter pull-right pointer" uib-tooltip="filter publications" ng-click="vm.filters.$display=!vm.filters.$display"></span> -->
+	 </h3>
+	 <p class="text-center" ng-show="vm.status=='display'&&vm.filtered_publications.length!=vm.publications.length">
+		 <small>({{vm.filtered_publications.length}} filtered publications)</small>
+	 </p>
+	<h3 class="text-center" ng-show="vm.status=='edit'">
+		<span ng-show="vm.new.publication_id">Edit</span><span ng-show="!vm.new.publication_id">New</span> publication 
+		<span class="fa fa-ban pull-right pointer" uib-tooltip="cancel" ng-click="vm.cancel()"></span>
+	</h3>	
+	<hr>
+	
+	<div ng-show="vm.status =='display'">
+		<div ng-show="!vm.publications.length">
+			<p class="text-center" style="font-style:italic;color:grey">There is no publication yet.</p>
+		</div>
+		
+		<div ng-show="vm.publications.length">
+			<div class="list-group">
+				<div ng-if="vm.filters.$display" class="list-group-item" style="padding:0;background-color:#FAFAFA">
+					<div style="padding:10px 15px">
+						<h4 class="text-center" style="margin-bottom:15px"><span class="fa fa-caret-square-o-up pull-left pointer" uib-tooltip="hide filters" ng-click="vm.filters.$display = false"></span>Filter publications <button class="btn btn-default btn-sm pull-right" style="margin-top:-5px" ng-click="vm.resetFilters()">reset</button></h4>
+						<input class="form-control" ng-model="vm.filters.title" placeholder="Filter by title..." ng-change="vm.applyFilters()">
+		        <ui-select multiple theme="bootstrap" class="form-control ui-select" ng-model="vm.filters.authors" close-on-select="false" ng-change="vm.applyFilters()">
+		            <ui-select-match placeholder=" Select authors...">{{$item}}</ui-select-match>
+		            <ui-select-choices repeat="authors in vm.fields.authors | filter:$select.search |orderBy:authors" > {{authors}} </ui-select-choices>
+		        </ui-select>
+		        <ui-select multiple theme="bootstrap" class="form-control ui-select" ng-model="vm.filters.journal" close-on-select="false" ng-change="vm.applyFilters()">
+		            <ui-select-match placeholder=" Select journal...">{{$item}}</ui-select-match>
+		            <ui-select-choices repeat="journal in vm.fields.journal | filter:$select.search |orderBy:journal" > {{journal}} </ui-select-choices>
+		        </ui-select>
+		        <ui-select multiple theme="bootstrap" class="form-control ui-select" ng-model="vm.filters.year" close-on-select="false" ng-change="vm.applyFilters()">
+		            <ui-select-match placeholder=" Select year...">{{$item}}</ui-select-match>
+		            <ui-select-choices repeat="year in vm.fields.year | filter:$select.search |orderBy:year" > {{year}} </ui-select-choices>
+		        </ui-select>
+						<div class="row">
+							<div class="col-sm-6">								
+				        <ui-select multiple theme="bootstrap" class="form-control ui-select" ng-model="vm.filters.doi" close-on-select="false" ng-change="vm.applyFilters()">
+				            <ui-select-match placeholder=" Select doi...">{{$item}}</ui-select-match>
+				            <ui-select-choices repeat="doi in vm.fields.doi | filter:$select.search |orderBy:doi" > {{doi}} </ui-select-choices>
+				        </ui-select>
+							</div>
+							<div class="col-sm-6">								
+				        <ui-select multiple theme="bootstrap" class="form-control ui-select" ng-model="vm.filters.pmid" close-on-select="false" ng-change="vm.applyFilters()">
+				            <ui-select-match placeholder=" Select pmid...">{{$item}}</ui-select-match>
+				            <ui-select-choices repeat="pmid in vm.fields.pmid | filter:$select.search |orderBy:pmid" > {{pmid}} </ui-select-choices>
+				        </ui-select>
+							</div>
+						</div>
+					</div>
+				</div> 
+			
+			<div class="list-group-item publications" ng-repeat="publi in vm.filtered_publications">
+					<div style="width:90%;display:inline-block;"><p style="font-weight:bold;margin:0">{{publi.publication_id}}. {{publi.title}}</p></div>
+					<div style="display:inline">
+						<span class="nowrap">					
+							<span class="fa fa-user pull-right" style="color:grey" uib-tooltip="added by {{publi.username}}" tooltip-append-to-body='true' ng-show="vm.currentUser.user_id!=publi.user_id"></span>
+							<span class="fa fa-times pull-right pointer" uib-tooltip="delete publication" tooltip-append-to-body='true' ng-show="(vm.currentUser.user_id==publi.user_id || vm.currentUser.is_admin=='Y') && !publi.$confirm_deletion" ng-click="publi.$confirm_deletion=true"></span>
+							<span class="fa fa-pencil pull-right pointer" uib-tooltip="edit publication" tooltip-append-to-body='true' ng-show="(vm.currentUser.user_id==publi.user_id || vm.currentUser.is_admin=='Y') && !publi.$confirm_deletion" ng-click="vm.edit(publi)"></span>
+						</span>
+					</div>		
+				<p>{{publi.authors}}</p>
+				<p style="color:#A4A4A4"> {{publi.journal}} <span ng-show="publi.year">- {{publi.year}} </span><span ng-show="publi.volume">- {{publi.volume}} </span><span ng-show="publi.page">({{publi.page}})</span></p>
+				<p>
+					<a ng-show="publi.doi" ng-href="https://doi.org/{{publi.doi}}" target="_blank">{{publi.doi}}</a>
+					<span ng-show="publi.doi && publi.pmid"> - </span>
+					<a ng-show="publi.pmid" ng-href="https://www.ncbi.nlm.nih.gov/pubmed/{{publi.pmid}}" target="_blank">PMID:{{publi.pmid}}</a>
+				</p>
+				<p ng-show="publi.url && publi.url!='https://doi.org/'+publi.doi && publi.url!='https://www.ncbi.nlm.nih.gov/pubmed/'+publi.pmid"> <a ng-href="{{publi.url}}" target="_blank">{{publi.url}}</a> </p>
+				<small ng-show="publi.abstract"><a ng-click="publi.showAbstract = !publi.showAbstract" class="pointer">{{{true:'show',false:'hide'}[!publi.showAbstract]}} abstract</a></small>
+				<blockquote class="small" style="text-align:justify" ng-show="publi.abstract&&publi.showAbstract"> {{publi.abstract}} </blockquote>
+				<div class="row" ng-show="publi.$confirm_deletion">				
+					<div class="btn-group pull-right" style="margin-right:15px">
+						<button class="btn btn-danger btn-xs" ng-click="vm.remove(publi)">confirm deletion</button>
+						<button class="btn btn-default btn-xs" ng-click="publi.$confirm_deletion=false">cancel</button>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	
+	<div ng-show="vm.status =='edit'">
+		<form ng-submit='vm.save()' id="publication_form" style="padding-right:20px">
+			<dl class="dl-horizontal dl-publication" ng-class="(vm.wait.pubmed) ? 'wait':'' ">				
+				<dt>PMID</dt><dd><input class="form-control" type='text' ng-model="vm.new.pmid" ng-change="vm.getPubmed()" placeholder="pmid" ng-style="{width:(vm.wait.pubmed) ? '90%':'100%'}" style="display:inline"/>
+					<img src="../images/wait.gif" ng-show="vm.wait.pubmed" class="pull-right" width="25" height="20" alt="Wait Loading Icon">
+				</dd>
+				<p class="text-center"><hr style="width:40%"></p>
+				<dt>Title</dt><dd><input class="form-control" type='text' ng-model="vm.new.title" ng-blur="vm.testExistence(vm.new)" placeholder="title" required/></dd>
+				<dt>Authors <span class="fa fa-info-circle" style="margin-left:5px" uib-tooltip="Authors must be separated by a comma"></span></dt><dd><input class="form-control" type='text' ng-model="vm.new.authors" placeholder="authors" /></dd>
+				<dt>Year</dt><dd><input class="form-control" type='number' ng-model="vm.new.year" placeholder="year" /></dd>
+				<dt>Journal</dt><dd><input class="form-control" type='text' ng-model="vm.new.journal" placeholder="journal" /></dd>
+				<dt>Volume</dt><dd><input class="form-control" type='text' ng-model="vm.new.volume" placeholder="volume"/></dd>
+				<dt>Page</dt><dd><input class="form-control" type='text' ng-model="vm.new.page" placeholder="page"/></dd>
+				<dt>DOI</dt><dd><input class="form-control" type='text' ng-model="vm.new.doi" ng-blur="vm.testExistence(vm.new)" placeholder="doi"/></dd>
+				<dt>Url<span class="fa fa-info-circle" style="margin-left:5px" uib-tooltip="if no doi or pmid please enter url"></span></dt><dd><input class="form-control" type='text' ng-model="vm.new.url" placeholder="url"/></dd>
+				<dt>Abstract</dt><dd><textarea class="form-control" rows="8" type='text' ng-model="vm.new.abstract" placeholder="abstract"/></dd>
+			</dl>
+			<p class="text-center">
+				<button type="submit" class="btn btn-success" ng-disabled="vm.wait.pubmed||!vm.new.title">Save</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			</p>
+			</div>
+		</form>
+	</div>
+
+</div>

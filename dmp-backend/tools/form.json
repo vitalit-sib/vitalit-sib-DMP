@@ -1,0 +1,1062 @@
+{
+	"anonymizations": {
+		"has_other": false,
+		"params": [
+			{
+				"parameter_id": "1",
+				"abbreviation": "Anonymization",
+				"name": "Anonymization",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "2",
+				"abbreviation": "Pseudonymization",
+				"name": "Pseudonymization",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		]
+	},
+	"analysis": {
+		"has_other": true,
+		"params": [
+			{
+				"parameter_id": "5",
+				"abbreviation": "matlab",
+				"name": "MATLAB",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "4",
+				"abbreviation": "r",
+				"name": "R",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "6",
+				"abbreviation": "xls",
+				"name": "Spreadsheet files",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "128",
+				"abbreviation": "scripts",
+				"name": "Custom script",
+				"description": "custom scripts, for example: Perl, Java, Python, C++...",
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		],
+		"other": {
+			"is_selected": false,
+			"value": ""
+		}
+	},
+	"datatypes": {
+		"has_other": true,
+		"params": [
+			{
+				"parameter_id": "19",
+				"abbreviation": "flow cytometry",
+				"name": "Flow cytometry data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null,
+				"metadata": [
+					{
+						"parameter_id": "85",
+						"abbreviation": "MIFlowCyt",
+						"name": "MIFlowCyt",
+						"description": "Minimum Information about a Flow Cytometry Experiment",
+						"link": "https://www.ncbi.nlm.nih.gov/pubmed/18752282",
+						"is_selected": true,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				],
+				"repositories": [
+					{
+						"parameter_id": "106",
+						"abbreviation": "FlowRepository",
+						"name": "FlowRepository",
+						"description": null,
+						"link": "https://flowrepository.org/",
+						"is_selected": true,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				]
+			},
+			{
+				"parameter_id": "11",
+				"abbreviation": "genomic",
+				"name": "Genomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null,
+				"metadata": [
+					{
+						"parameter_id": "78",
+						"abbreviation": "MIGS/MIMS",
+						"name": "MIGS/MIMS",
+						"description": "Minimum Information About a Genome or Metagenome experiment",
+						"link": "http://www.nature.com/nbt/journal/v26/n5/full/nbt1360.html",
+						"is_selected": true,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "86",
+						"abbreviation": "MINSEQE",
+						"name": "MINSEQE",
+						"description": "Minimum Information  about a high throughput Sequencing Experiment",
+						"link": "http://fged.org/projects/minseqe/",
+						"is_selected": false,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				],
+				"repositories": [
+					{
+						"parameter_id": "90",
+						"abbreviation": "ArrayExpress",
+						"name": "ArrayExpress",
+						"description": null,
+						"link": "https://www.ebi.ac.uk/arrayexpress/",
+						"is_selected": false,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "94",
+						"abbreviation": "dbSNP",
+						"name": "dbSNP",
+						"description": null,
+						"link": "https://www.ncbi.nlm.nih.gov/SNP/",
+						"is_selected": true,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "91",
+						"abbreviation": "EGA",
+						"name": "EGA",
+						"description": null,
+						"link": "https://ega-archive.org/",
+						"is_selected": false,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "92",
+						"abbreviation": "ENA",
+						"name": "ENA",
+						"description": null,
+						"link": "http://www.ebi.ac.uk/ena",
+						"is_selected": false,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "93",
+						"abbreviation": "EVA",
+						"name": "EVA",
+						"description": null,
+						"link": "http://www.ebi.ac.uk/eva/",
+						"is_selected": false,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				]
+			},
+			{
+				"parameter_id": "14",
+				"abbreviation": "lipidomic",
+				"name": "Lipidomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null,
+				"metadata": [
+					{
+						"parameter_id": "81",
+						"abbreviation": "MIMIx",
+						"name": "MIMIx",
+						"description": "Minimum Information about a Molecular Interaction Experiment",
+						"link": "http://www.nature.com/nbt/journal/v25/n8/full/nbt1324.html",
+						"is_selected": true,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				],
+				"repositories": [
+					{
+						"parameter_id": "99",
+						"abbreviation": "XCMS",
+						"name": "XCMS",
+						"description": null,
+						"link": "https://xcmsonline.scripps.edu/landing_p",
+						"is_selected": true,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				]
+			},
+			{
+				"parameter_id": "15",
+				"abbreviation": "metabolomic",
+				"name": "Metabolomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null,
+				"metadata": [
+					{
+						"parameter_id": "82",
+						"abbreviation": "CIMR",
+						"name": "CIMR",
+						"description": "Core Information for Metabolomics Reporting",
+						"link": "http://mibbi.sourceforge.net/projects/CIMR.shtml",
+						"is_selected": true,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "87",
+						"abbreviation": "MIRAGE",
+						"name": "MIRAGE",
+						"description": "Minimum Information required for a glycomics experiment",
+						"link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3976285/",
+						"is_selected": false,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				],
+				"repositories": [
+					{
+						"parameter_id": "100",
+						"abbreviation": "IntAct",
+						"name": "IntAct",
+						"description": null,
+						"link": "http://www.ebi.ac.uk/intact/",
+						"is_selected": true,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "101",
+						"abbreviation": "MetaboLights",
+						"name": "MetaboLights",
+						"description": null,
+						"link": "http://www.ebi.ac.uk/metabolights/",
+						"is_selected": false,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "102",
+						"abbreviation": "XCMS",
+						"name": "XCMS",
+						"description": null,
+						"link": "https://xcmsonline.scripps.edu/landing_p",
+						"is_selected": false,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				]
+			},
+			{
+				"parameter_id": "16",
+				"abbreviation": "microscopy",
+				"name": "Microscopy images",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null,
+				"metadata": [
+					{
+						"parameter_id": "83",
+						"abbreviation": "OME-XML",
+						"name": "OME-XML",
+						"description": "Open Microscopy Environment XML",
+						"link": "https://docs.openmicroscopy.org/ome-model/5.5.7/ome-xml/index.html",
+						"is_selected": true,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				],
+				"repositories": [
+					{
+						"parameter_id": "103",
+						"abbreviation": "EMDB",
+						"name": "EMDB",
+						"description": null,
+						"link": "https://www.ebi.ac.uk/pdbe/emdb/",
+						"is_selected": true,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				]
+			},
+			{
+				"parameter_id": "17",
+				"abbreviation": "molecular biology",
+				"name": "Molecular Biology data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null,
+				"metadata": [
+					{
+						"parameter_id": "84",
+						"abbreviation": "DataCite",
+						"name": "DataCite",
+						"description": "DataCite Metadata Schema",
+						"link": "https://schema.datacite.org/",
+						"is_selected": true,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				],
+				"repositories": [
+					{
+						"parameter_id": "104",
+						"abbreviation": "Zenodo",
+						"name": "Zenodo",
+						"description": null,
+						"link": "https://zenodo.org/",
+						"is_selected": true,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				]
+			},
+			{
+				"parameter_id": "12",
+				"abbreviation": "proteomic",
+				"name": "Proteomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null,
+				"metadata": [
+					{
+						"parameter_id": "79",
+						"abbreviation": "MIAPE",
+						"name": "MIAPE",
+						"description": "Minimum Information About a Proteomics Experiment",
+						"link": "http://www.psidev.info/node/91",
+						"is_selected": true,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				],
+				"repositories": [
+					{
+						"parameter_id": "96",
+						"abbreviation": "PDBe",
+						"name": "PDBe",
+						"description": null,
+						"link": "https://www.ebi.ac.uk/pdbe/",
+						"is_selected": false,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "95",
+						"abbreviation": "PRIDE",
+						"name": "PRIDE",
+						"description": null,
+						"link": "https://www.ebi.ac.uk/pride/archive/",
+						"is_selected": true,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				]
+			},
+			{
+				"parameter_id": "13",
+				"abbreviation": "transcriptomic",
+				"name": "Transcriptomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null,
+				"metadata": [
+					{
+						"parameter_id": "80",
+						"abbreviation": "MIAME",
+						"name": "MIAME",
+						"description": "Minimum Information About a Microarray Experiment",
+						"link": "http://fged.org/projects/miame/",
+						"is_selected": true,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "88",
+						"abbreviation": "MINSEQE",
+						"name": "MINSEQE",
+						"description": "Minimum Information  about a high throughput Sequencing Experiment",
+						"link": "http://fged.org/projects/minseqe/",
+						"is_selected": false,
+						"parameter_type": "metadata",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				],
+				"repositories": [
+					{
+						"parameter_id": "97",
+						"abbreviation": "ArrayExpress",
+						"name": "ArrayExpress",
+						"description": null,
+						"link": "https://www.ebi.ac.uk/arrayexpress/",
+						"is_selected": true,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					},
+					{
+						"parameter_id": "98",
+						"abbreviation": "GEO",
+						"name": "GEO",
+						"description": null,
+						"link": "https://www.ncbi.nlm.nih.gov/geo/",
+						"is_selected": false,
+						"parameter_type": "repositories",
+						"dependent_parameter_id": null,
+						"value": null
+					}
+				]
+			}
+		],
+		"other": {
+			"is_selected": false,
+			"value": ""
+		}
+	},
+	"documentations": {
+		"has_other": false,
+		"params": [
+			{
+				"parameter_id": "26",
+				"abbreviation": "calibration",
+				"name": "Instrument calibration",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "31",
+				"abbreviation": "db",
+				"name": "Database",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "34",
+				"abbreviation": "ELIS",
+				"name": "Electronic Laboratory Information System",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "29",
+				"abbreviation": "entry_valid",
+				"name": "Data entry validation",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "32",
+				"abbreviation": "filename",
+				"name": "File naming conventions",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "33",
+				"abbreviation": "folders",
+				"name": "Folder structure",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "30",
+				"abbreviation": "peer_review",
+				"name": "Data peer review",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "28",
+				"abbreviation": "recording",
+				"name": "Data recording standards",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "27",
+				"abbreviation": "repeats",
+				"name": "Repeated measurements",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		]
+	},
+	"licenses": {
+		"has_other": false,
+		"params": [
+			{
+				"parameter_id": "41",
+				"abbreviation": "CC BY",
+				"name": "Attribution",
+				"description": null,
+				"link": "https://creativecommons.org/licenses/by/4.0/",
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "44",
+				"abbreviation": "CC BY-NC",
+				"name": "Attribution-Noncommercial",
+				"description": null,
+				"link": "https://creativecommons.org/licenses/by-nc/4.0/",
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "46",
+				"abbreviation": "CC BY-NC-ND",
+				"name": "Attribution-Noncommercial-Noderivs",
+				"description": null,
+				"link": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "45",
+				"abbreviation": "CC BY-NC-SA",
+				"name": "Attribution-Noncommercial-Sharealike",
+				"description": null,
+				"link": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "43",
+				"abbreviation": "CC BY-ND",
+				"name": "Attribution-Noderivs",
+				"description": null,
+				"link": "https://creativecommons.org/licenses/by-nd/4.0/",
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "42",
+				"abbreviation": "CC BY-SA",
+				"name": "Attribution-Sharealike",
+				"description": null,
+				"link": "https://creativecommons.org/licenses/by-sa/4.0/",
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		]
+	},
+	"sample_types": {
+		"has_other": false,
+		"params": [
+			{
+				"parameter_id": "48",
+				"abbreviation": "human",
+				"name": "human",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		]
+	},
+	"security_standards": {
+		"has_other": false,
+		"params": [
+			{
+				"parameter_id": "52",
+				"abbreviation": "ISO/IEC 19772:2009",
+				"name": "ISO/IEC 19772:2009",
+				"description": "authenticated encryption",
+				"link": "https://www.iso.org/standard/46345.html",
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "51",
+				"abbreviation": "ISO/IEC 27001:2013",
+				"name": "ISO/IEC 27001:2013",
+				"description": "information security management system - requirements",
+				"link": "https://www.iso.org/standard/54534.html",
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "53",
+				"abbreviation": "ISO/IEC 27002:2013",
+				"name": "ISO/IEC 27002:2013",
+				"description": "code of practice for information security controls",
+				"link": "https://www.iso.org/standard/46345.html",
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		]
+	},
+	"storage": {
+		"has_other": true,
+		"params": [
+			{
+				"parameter_id": "58",
+				"abbreviation": "Vital-IT",
+				"name": "Vital-IT servers",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		],
+		"other": {
+			"is_selected": false,
+			"value": ""
+		}
+	},
+	"version_controls": {
+		"has_other": true,
+		"params": [
+			{
+				"parameter_id": "61",
+				"abbreviation": "git",
+				"name": "Git",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "63",
+				"abbreviation": "locally",
+				"name": "Local solutions",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "62",
+				"abbreviation": "svn",
+				"name": "SVN",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		],
+		"other": {
+			"is_selected": false,
+			"value": ""
+		}
+	},
+	"ethics": {
+		"has_other": false,
+		"params": [
+			{
+				"parameter_id": "122",
+				"abbreviation": "committee",
+				"name": "We have the approval of an ethics committee",
+				"description": "We have the approval of an ethics committee",
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": "48",
+				"value": null
+			},
+			{
+				"parameter_id": "123",
+				"abbreviation": "consent",
+				"name": "We have a formal consent agreement",
+				"description": "We have a formal consent agreement",
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": "48",
+				"value": null
+			},
+			{
+				"parameter_id": "121",
+				"abbreviation": "perm",
+				"name": "We have the necessary permission to obtain, process, preserve and share the data",
+				"description": "We have the necessary permission to obtain, process, preserve and share the data",
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		]
+	},
+	"data": {
+		"has_other": false,
+		"params": [
+			{
+				"parameter_id": "127",
+				"abbreviation": "confidentialData",
+				"name": "Confidential data",
+				"description": "We will use confidential data",
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "132",
+				"abbreviation": "existing_data",
+				"name": "Use existing data",
+				"description": "Use existing data",
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "129",
+				"abbreviation": "human",
+				"name": "human",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "131",
+				"abbreviation": "permission",
+				"name": "permission",
+				"description": null,
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": "open"
+			},
+			{
+				"parameter_id": "130",
+				"abbreviation": "useExistingData",
+				"name": "Use existing data",
+				"description": "Use existing data",
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "126",
+				"abbreviation": "volumeMax",
+				"name": "Maximum volume of data",
+				"description": "Estimated maximum volume of data",
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": "1000"
+			},
+			{
+				"parameter_id": "125",
+				"abbreviation": "volumeMin",
+				"name": "Minimum volume of data",
+				"description": "Estimated minimum volume of data",
+				"link": null,
+				"is_selected": true,
+				"dependent_parameter_id": null,
+				"value": "100"
+			},
+			{
+				"parameter_id": "124",
+				"abbreviation": "volumeUnknown",
+				"name": "Volume not known",
+				"description": "The volume of generated data is not known at this point",
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		]
+	},
+	"internal_existing_data": {
+		"use": false,
+		"has_other": true,
+		"params": [
+			{
+				"parameter_id": "19",
+				"abbreviation": "flow cytometry",
+				"name": "Flow cytometry data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "11",
+				"abbreviation": "genomic",
+				"name": "Genomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "14",
+				"abbreviation": "lipidomic",
+				"name": "Lipidomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "15",
+				"abbreviation": "metabolomic",
+				"name": "Metabolomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "16",
+				"abbreviation": "microscopy",
+				"name": "Microscopy images",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "17",
+				"abbreviation": "molecular biology",
+				"name": "Molecular Biology data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "12",
+				"abbreviation": "proteomic",
+				"name": "Proteomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "13",
+				"abbreviation": "transcriptomic",
+				"name": "Transcriptomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		],
+		"other": {
+			"is_selected": false,
+			"value": ""
+		}
+	},
+	"external_existing_data": {
+		"use": false,
+		"has_other": true,
+		"params": [
+			{
+				"parameter_id": "19",
+				"abbreviation": "flow cytometry",
+				"name": "Flow cytometry data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "11",
+				"abbreviation": "genomic",
+				"name": "Genomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "14",
+				"abbreviation": "lipidomic",
+				"name": "Lipidomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "15",
+				"abbreviation": "metabolomic",
+				"name": "Metabolomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "16",
+				"abbreviation": "microscopy",
+				"name": "Microscopy images",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "17",
+				"abbreviation": "molecular biology",
+				"name": "Molecular Biology data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "12",
+				"abbreviation": "proteomic",
+				"name": "Proteomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			},
+			{
+				"parameter_id": "13",
+				"abbreviation": "transcriptomic",
+				"name": "Transcriptomic data",
+				"description": null,
+				"link": null,
+				"is_selected": false,
+				"dependent_parameter_id": null,
+				"value": null
+			}
+		],
+		"other": {
+			"is_selected": false,
+			"value": ""
+		}
+	}
+}

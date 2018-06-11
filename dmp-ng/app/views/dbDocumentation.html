@@ -1,0 +1,239 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class = 'container-fluid' access='editor'>
+	<div class="panel panel-default" >
+		<div class="panel-body">
+			<h1 id="toc_0">DMP CANVAS GENERATOR README</h1>
+
+			<h2 id="toc_1">Introduction:</h2>
+
+			<p>DMP Canvas Generator is a user-friendly questionnaire allowing the construction of a data management plan draft that is extracted as a Word document.
+			The DMP produced is a canvas, therefore the user needs to complete and validate the information contained in the document.</p>
+
+			<p>The web application was built with usage flexibility as a priority. The structure of the generated DMP canvas is independent from the structure of the questionnaire. Therefore, the same questionnaire can potentially be used for different DMP templates.</p>
+
+			<p>The construction of the DMP canvas is uniquely based on the database (tables <code>parameter_types</code>, <code>parameter</code>, <code>section</code> and <code>templates</code>).</p>
+
+			<hr>
+
+			<h4 id="toc_2">DMP Canvas generator dependency</h4>
+
+			<p>DMP Canvas generator uses
+			<a href="https://pandoc.org/" title="pandoc&#39;s homepage">pandoc</a> to create the word document.
+			If pandoc is not installed on your computer, please install it as described <a href="https://pandoc.org/installing.html" title="pandoc&#39;s installation page">here.</a>.</p>
+
+			<hr>
+
+			<h2 id="toc_3">How to add a new text:</h2>
+
+			<p>Does the text that will be added fall into one of the categories defined in the <code>parameter_type</code> table?
+			If not, a new category has to be created in the <code>parameter_type</code> table (see ”how to add a parameter type”).
+			Does the text that will be added fall into one of the sections described in the <code>sections</code> table?
+			If not, a new section in the <code>sections</code> table has to be created.
+			(see ”how to add a section”).</p>
+
+			<h3 id="toc_4">Remarks:</h3>
+
+			<p>Each parameter found in the <code>parameters</code> table is bound (i.e. corresponds) to a text (see <code>templates</code> table) and to a <code>parameter_type</code> (i.e. category). The order according to which the text will be rendered in the Word document is defined by the <code>sections</code> table.</p>
+
+			<h2 id="toc_5">How to check if a desired parameter exists:</h2>
+
+			<p>To check if a parameter already exists, the first step is to go the <code>parameters</code> table and check if the name of the desired parameter already exists. If the name already exists, the second step is to the check if the <code>parameter_type_id</code> matches the desired type. If this is the case, there is a text corresponding to the specific parameter from the specific category already present. To add another text to the parameter see “case specific to an institution”.
+			If the desired parameter does not exist, see “How to add a parameter type?”.</p>
+
+			<h2 id="toc_6">How to add a parameter type?</h2>
+
+			<p>The only attributes that have to be taken into consideration when the table <code>parameter_types</code> is being filled are the <code>has_parent</code> and <code>has_other</code> attributes. <code>has_other</code> is set to true to declare that the user can enter an option that is not present, using free text. <code>has_parent</code> is set to true in order to obtain a tree structure, as explained in “database table description”. Generally, this attribute is set to false.</p>
+
+			<h2 id="toc_7">How to add a section?</h2>
+
+			<p>To add a section, the <code>sections</code> table has to be filled.
+			The position of the section is defined by the <code>section_number</code> column. It is possible to add a heading and/ or a footer in the corresponding row.</p>
+
+			<h2 id="toc_8">How to add a new parameter?</h2>
+
+			<p>The following information about the parameter has to be completed in the table <code>parameters</code> :
+			<code>parameter_type_id</code> (corresponding to the <code>parameter_types table</code>), <code>abbreviation</code>, <code>name</code>, <code>description</code> (if needed), ‘link’ (if needed), <code>idx</code> ( index to choose in which  order to place the parameter in the questionnaire) , <code>is_selected</code> (Y: checkbox selected. N: checkbox not selected. F: float number. T: text), value (only necessary to give a value to the parameter), <code>parent_parameter_id</code> (see description below), <code>dependent_parameter_id</code> (see  description below).
+			<code>parent_parameter_id</code>: used to construct a relation tree as shown in the figure below. For example, it can be used to link a datatype to a metadata standard or a repository.
+			<code>dependent_parameter_id</code>: Mainly used by the frontend in order to selectively display sections of the questionnaire depending on whether the parameter is selected.</p>
+
+			<h3 id="toc_9">Remarks:</h3>
+
+			<p>Institution specific recommendations can be added to the parameter as described in “case specific to an institution”.
+			Once the table <code>parameters</code> is filled, the <code>templates</code> table has to be completed with the following information:
+			<code>section_number</code> (the position in the Word document where the text is going to be placed),
+			<code>parameter_id</code> (allows to bind the text to a parameter of the <code>parameters</code> table).</p>
+
+			<h3 id="toc_10">Remarks:</h3>
+
+			<p>The <code>parameter_id</code>  has to be set to <code>NULL</code> for cases where a text will be added when the user selects <code>other…</code> in the questionnaire.
+			In the case of a boolean choice, such as working with human samples or not, if the attribute is not selected (i.e. set to false), the <code>parameter_id</code> has to be set to NULL, the attribute’s <code>parameter_id</code> has to be entered in the <code>not_parameter_id</code> column and the entry has to be filled with the text. </p>
+
+			<h2 id="toc_11">Case specific to an institution:</h2>
+
+			<h3 id="toc_12">Add an institution specific text:</h3>
+
+			<p>To add an institution specific text, the first step is to identify the text that needs to be modified in the <code>templates</code> table with the help of <code>section_number</code> and <code>parameter_id</code>.  Then one has to duplicate the row and modify the text. <em>Tip</em>: it is important to remember the id of new template!
+			The second step is to go to the <code>institution_templates</code> table and add the name of the institution and the id of the template just created.</p>
+
+			<h3 id="toc_13">Add institution specific recommendations:</h3>
+
+			<p>Once the id of the desired recommendation has been identified using <code>cv_recommendation</code> , the id can be added in the <code>institution_recommendation</code> table together with the <code>institution_name</code> and the <code>parameter_id</code>.</p>
+
+			<hr>
+
+			<h2 id="toc_14">Database table description:</h2>
+
+			<p><img   class="img-responsive center-block" src="../images/dmp_db_structure.png" alt="db_structure"  style="width:75%;75%;"></p>
+
+			<h3 id="toc_15">cv_recommendation:</h3>
+
+			<p>Control vocabulary table for the <code>institution_recommendation</code> table. Each <code>recommendation_id</code> correspond to a recommendation given by an institution (ex recommended, duplicated, removed).</p>
+
+			<h3 id="toc_16">debug:</h3>
+
+			<p>Table used to debug sql command line.</p>
+
+			<h3 id="toc_17">dmp_parameters:</h3>
+
+			<p>Table that contains the information necessary to recreate the questionnaires previously filled by a given user.</p>
+
+			<h3 id="toc_18">dmps:</h3>
+
+			<p>Table that contains the date of creation of a DMP canvas and the user id in order to be able the reconstruct previous questionnaires filled by the user.</p>
+
+			<h3 id="toc_19">institution_recommendation:</h3>
+
+			<p>Table that allows to give a specific recommendation (as recommended it or remove it)  for a given <code>parameter_id</code>  for each institution .</p>
+
+			<h3 id="toc_20">institution_templates:</h3>
+
+			<p>Table that allows to have texts specific to an institution.
+			If a <code>template_id</code> is added with its <code>institution_name</code> the corresponding text specific to the institution would be written in the word document instead of the text nonspecific to an institution.</p>
+
+			<h3 id="toc_21">institutions</h3>
+
+			<p>Table that contain the name of all the institution from all the registered users.</p>
+
+			<h3 id="toc_22">logs:</h3>
+
+			<p>To be used if someone wants to keep log tracking.</p>
+
+			<h3 id="toc_23">news:</h3>
+
+			<p>To be used if someone wants to display news.</p>
+
+			<h3 id="toc_24">parameter_types:</h3>
+
+			<p>Very important table for the DMP canvas construction.
+			All parameters (see <strong>parameters</strong> table) are classified by the different types of this table.</p>
+
+			<p><code>has_parent</code> column allows a construction among the parameters as a tree.
+			For example, since <em>datatype</em> is bound to <em>metadata</em> and <em>repositories</em>, the metadata and the repositories are the children of datatypes (see image below).</p>
+
+			<p><code>has_other</code> column allows to add another option to the parameters list.
+			<img  class="img-responsive center-block" src="../images/parent.png" alt="db_structure" title="db_structure"  style="width:50%;height:50%;"></p>
+			<h3 id="toc_25">parameters:</h3>
+
+			<p>Very important table for the DMP canvas construction.
+			The column <code>is_selected</code> allows to choose if a parameter will appear checked in the questionnaire by default. If necessary the <code>value</code> column is used to give a default value to a parameter, which is especially important when the user selects <code>other…</code> in the questionnaire. As mentioned in the <code>parameter_type</code> section, in the table <code>parameter_types</code> one can choose if the <code>parameter_type</code> has a parent. In this case the column <code>parent_parameter_id</code> allows to complete the parameters tree.</p>
+
+			<p>If a parameter is dependent on another one, it has to be specified in the <code>dependent_parameter_id</code> column. For example, when human data (<code>parameter_id = 127</code>)  are used, it is necessary to specify whether the user has the approval of an ethics committee (<code>parameter_id = 122</code>). Therefore the <code>paremeter_id = 122</code> (ethics committee) will have <code>dependent_paratemer_id = 127</code> (human).</p>
+
+			<h3 id="toc_26">sections:</h3>
+
+			<p>The <code>section_number</code> allows to choose where to place a text and if wanted where to add a <code>title</code> , a <code>heading</code> and a <code>footer</code> for the given section.</p>
+
+			<h3 id="toc_27">templates:</h3>
+
+			<p>The <code>section_number</code> allows to place a text in the desired section.
+			The text has to be linked to a <code>parameter_id</code>  with the exception of when one wants to add an explanation text. In that case the <code>parameter_id</code> has to be set to NULL.</p>
+
+			<p>In the case of a boolean choice, such as working with human samples or not, if the entity is not selected, one has to set the <code>parameter_id</code> to NULL, add the entity&#39;s <code>parameter_id</code> to the  <code>not_parameter_id</code> column and fill the entry corresponding to the true text normally.
+			Using the previous example, if human has <code>parameter_id = 129</code>, the table should be filled as follows:
+			<code>parameter_id = NULL</code>, <code>text = not human</code> , <code>not_parameter_id = 129</code>,
+			<code>parameter_id = 129</code>, <code>text = not human</code> , <code>not_parameter_id = NULL</code>.</p>
+
+			<h4 id="toc_28">Variables inside template tables:</h4>
+
+			<p>Variables contained in the text are automatically replaced by the corresponding information.</p>
+
+			<p>The <code>{:name}</code>variable is replaced with the name of the corresponding <code>parameter_id</code>. When <code>other...</code>is selected, the name is replaced with the name typed in by the user.
+			The <code>{:abbreviation}</code> variable is replaced with the abbreviation of the corresponding <code>parameter_id</code></p>
+
+			<p>If one wants to write all selected parameters corresponding to a <code>parameter_type</code> , the following structure has to be used: <code>{::parameter type}</code>
+			For example: &quot;The produced raw data will be processed using the following tools: <code>{::analysis}</code>.&quot;
+			will produce: &quot;The produced raw data will be processed using the following tools: MATLAB and Spreadsheet files.&quot;</p>
+
+			<p>Metadata and repositories are constructed as children for the json file that is used by the frontend and therefore have a special variable construction.
+			As an example, if one selects genomic data as datatype and the dbSNP as a repository, the variables in the following sentence will be automatically replaced.
+			 For example:
+			&quot;<code>{:name}</code> will be deposited in <code>{:repositories:name}</code> (<code>{:repositories:link}</code>)&quot;
+			will produce:
+			&quot;Genomic data will be deposited in dbSNP (https://www.ncbi.nlm.nih.gov/SNP/).&quot;</p>
+
+			<p>The data parameters contain values entered by the user which do not fit other categories.
+			The variables contained in data will be automatically replaced by the values selected by the user.
+			For example:
+			&quot;We estimate that a total data volume ranging between <code>{:data:volumeMin}</code>and <code>{:data:volumeMax}</code>will be generated during the course of the project.&quot;
+			will produce:
+			&quot;We estimate that a total data volume ranging between 100 GB and 1 TB will be generated during the course of the project.&quot;</p>
+
+			<span class="anchor" id="header_footer"></span>
+
+			<h4 >How to add a text that depends on a parameter of the introduction / conclusion part?</h4>
+			<p>If one wants to write all parameters corresponding to a <code>key_name</code> in the introduction (heading) or/and in the conclusion (footer), the following structure has to be used: <br>
+				If you want to display a text when the parameter is selected <code style="padding-right:0">{{</code><code style="padding-left:0">param:key_name text}}"</code>.<br>
+
+				If you want to display a text when the parameter is unselected<code style="padding-right:0"> {{! </code><code style="padding-left:0">param:key_name text}}"</code>.<br>
+				For example, to display a text specific to the human when human is selected, the user will have to write the following sentence:
+				<code style="padding-right:0">{{</code><code style="padding-left:0">param:human This is my text specific to human when human is selected}}"</code>
+				or if the user wants to display a text about human when human is not selected:
+				<code style="padding-right:0">{{!</code><code style="padding-left:0">param:human This is my text specific to human when human is not selected}}"</code>. Please note that the <code>key_name</code> has been replaced by <code>human_sample</code>.
+			</p>
+			<p>The <code>key_name</code> is the following: {{vm.key_names}}.</p>
+
+
+
+			<p>
+			To see more key_name in the list above, one has to check 'Y' in the column <code>text_in_variable</code> of the <code>parameters</code> table.
+			</p>
+			<!-- <p>Remarks is important to respect the structure: <code>{{param:key_name</code> followed by <code>space</code> follwed by the <code>text</code>.</p> -->
+
+
+
+			<h3 id="toc_29">users:</h3>
+
+			<p>Used to store all the DMP users.
+			If the login name is human readable, it means that the user has an account in development mode. Otherwise this is the result of a SWITCHaai login.</p>
+
+			<h3 id="toc_30">SWITCHaai:</h3>
+
+			<p>Remarks: the SWITCHaai login is domain name dependent. In order to use the SWITCHaai login the web application domain needs to be registered at
+			<a href="https://www.switch.ch/" title="Switch link">SWITCH</a>.</p>
+
+		</div>
+
+	</div>
+
+</div>
+

@@ -1,0 +1,46 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class = 'container-fluid'>
+	<div>
+		<p class = 'text-right'><button class = 'btn btn-primary btn-sm' ng-click = 'vm.initExperiment()'>new dataset</button></p>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="panel-title">Datasets of {{vm.project.name}}</div>
+		</div>
+		<table class = 'table table-hover' st-table>
+			<thead>
+				<th st-sort='name'>Name</th>
+				<th st-sort='user'>User</th>
+				<th st-sort='date'>Date</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat = 'dataset in vm.datasets' ng-click = 'vm.goTo(dataset.dataset_id)' class = 'pointer'>
+					<td>{{dataset.name}}</td>
+					<td><b>{{dataset.user_name}}</b><br>{{dataset.group_name}}</td>
+					<td>{{dataset.timestamp}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>

@@ -1,0 +1,287 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+/* Space out content a bit */
+body {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  margin-bottom: 60px;
+  margin-top: 30px;
+  background: white;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+/*  padding-top: 19px;*/
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+/*  background-color: #f5f5f5;*/
+  z-index: 10;
+}
+.strong, .bold{
+	font-weight: bold;
+}
+
+
+
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+/* SMART TABLE CSS */
+.st-sort-ascent:before{
+  content: '\25B2';
+}
+
+.st-sort-descent:before{
+  content: '\25BC';
+}
+/* END smart table */
+
+/* FILE UPLOAD */
+.my-drop-zone { border: dotted 3px lightgray; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+/* END FILE UPLOAD */
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+}
+
+.popoverurl{
+    font-size: 9px;
+}
+
+.viewdatatr .popover-inner{
+	overflow: hidden;
+}
+
+.dl-publication > dt{
+	margin-top:6px;
+	width:80px;
+}
+.dl-publication > dd{
+	margin-bottom:10px;
+	margin-left:90px;
+}
+
+.pointer{
+	cursor:pointer;
+}
+
+.publications > p{
+	margin:0;
+}
+
+.wait{
+	opacity:0.7;
+	cursor:not-allowed;
+}
+
+.toast {
+    opacity: 1 !important;
+}
+
+.ui-select{
+	margin-top:5px;
+	min-height:30px;
+}
+
+.basic-category{
+  font-family: Avenir,Helvetica,sans-serif;
+  color: #404040;
+  margin-bottom: 50px;
+}
+.checkbox-row{
+  padding-bottom: 10px;
+}
+.checkbox-row-big{
+  padding-bottom: inherit;
+}
+
+.custom-slider.rzslider .rz-bar {
+  background: #ffe4d1;
+  height: 2px;
+}
+.custom-slider.rzslider .rz-selection {
+  background: orange;
+}
+
+.custom-slider.rzslider .rz-pointer {
+  width: 8px;
+  height: 16px;
+  top: auto; /* to remove the default positioning */
+  bottom: 0;
+  background-color: #333;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.custom-slider.rzslider .rz-pointer:after {
+  display: none;
+}
+
+.custom-slider.rzslider .rz-bubble {
+  bottom: 14px;
+}
+
+.custom-slider.rzslider .rz-limit {
+  font-weight: bold;
+  color: orange;
+}
+
+.custom-slider.rzslider .rz-tick {
+  width: 1px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 0;
+  background: #ffe4d1;
+  top: -1px;
+}
+
+.custom-slider.rzslider .rz-tick.rz-selected {
+  background: orange;
+}
+
+.small-form {
+	padding-bottom:0;
+	padding-top:0;
+	height:20px;
+}
+
+.hoverChange:hover{
+  color: dodgerblue;
+}
+
+.navLink{
+	padding: 15px 10px;
+	line-height: 20px;
+	color: #777;
+	display: block;
+}
+
+.navLink:hover{
+	text-decoration: none;
+	color: #333;
+}
+
+.navLink:visited, .navLink:active{
+	text-decoration: none;
+}
+
+.anchor{
+  display: block;
+  height: 115px; /*same height as header*/
+  margin-top: -115px; /*same height as header*/
+  visibility: hidden;
+}
+
+#connect-orcid-button{
+	border: 1px solid #D3D3D3;
+	padding: .3em;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 1px 1px 3px #999;
+	cursor: pointer;
+	color: #999;
+	font-weight: bold;
+	font-size: .8em;
+	line-height: 24px;
+	vertical-align: middle;
+}
+
+#connect-orcid-button:hover{
+	border: 1px solid #338caf;
+	color: #338caf;
+}
+
+#orcid-id-logo{
+	display: block;
+	margin: 0 .5em 0 0;
+	padding: 0;
+	float: left;
+}

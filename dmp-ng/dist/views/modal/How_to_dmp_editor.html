@@ -1,0 +1,20 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+--> <div class="modal-header"> <button type="button" class="btn btn-primary btn-sm" ng-click="$ctrl.close()"> <span class="glyphicon glyphicon-ban-circle"></span> close </button> </div> <div class="modal-body"> <div class="container" access="editor"> <div class="panel panel-default"> <div class="panel-body"> <h2 id="toc_0">How to use the DMP Canvas Editor</h2> <h3 id="toc_1">Structure of the editor</h3> <p>The editor consists of 2 main modules: the template editor and the recommendation editor. </p> <p>The <strong>template editor</strong> can be used to define institution specific texts in the Word file produced by the DMP Canvas Generator. </p> <p>The <strong>recommendation editor</strong> allows institutions to add recommended selections for their users in the questionnaire (for example recommended security standards, licenses). In addition, it provides the possibility to filter the available choices in the questionnaire. </p> <h3 id="toc_2">How to Use the Template Editor</h3> <p>The drop-down menu can be used to select a section title, corresponding to a section that will be rendered in the Word document. Once a section is selected, the user can modify the text that appears in the chosen section. Specifically the user can modify the text in 3 places:</p> <p><strong>A) Introductory text:</strong> The introductory text of the section that will be rendered regardless of the user&#39;s choices.</p> <p><strong>B) Text related to the selected parameter:</strong> The main text of the section that depends on the user&#39;s choices. The drop-down menus can be used to select the parameter choice for which the text will be modified.</p> <p><strong>C) Concluding text:</strong> The concluding text of the section that will be rendered regardless of the user&#39;s choices.</p> <p>In all three cases, a button (<code>Reset to default text</code>) can be used to disregard any text modifications. </p> <p>Clicking on <code>Preview</code>opens a preview of the Word document that will be produced, taking into account the text modifications. Preview supports live editing, allowing the editor to visualize the changes in the Word document as they type. </p> <h3 id="toc_3">How to Use the Recommendation Editor</h3> <p>A drop-down menu allows to select a parameter to be edited. All database entries for the chosen parameter are displayed, and the editor has the choice to define whether each entry should be displayed as an option to the user and whether the entry should be flagged as recommended by the institution, by simply clicking on the words <code>displayed</code> / <code>not displayed</code> , <code>recommended</code> / <code>not recommended</code>.</p> <h3 id="toc_4">Save</h3> <p>When the editor has finished modifying the text and recommendations, they have to save their changes by clicking on the respective button. Please not that each module of the editor has an independent <code>Save</code> button.</p> </div> </div> </div> </div>

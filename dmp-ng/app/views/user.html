@@ -1,0 +1,86 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class="col-md-10 col-md-offset-1">
+	<h3>Edit user</h3>
+	<div class = 'panel panel-default' style = 'margin-top: 50px;'>
+		<div class = 'panel-heading'>
+			<div class = 'panel-title'>{{vm.user.firstname + " " + vm.user.lastname}}</div>
+		</div>
+		<div class = 'panel-body'>
+			<form novalidate name="form" ng-submit="vm.updateUser()" role="form" class = 'form-horizontal'>
+				<div class="form-group">
+					<label class = 'col-sm-3 control-label' for="login">Login name</label>
+					<div class = 'col-sm-6'>
+					 <p class="form-control-static">{{vm.user.login}}</p>
+					 </div>
+				</div>
+
+				<div class="form-group" ng-class="{ 'has-error': form.firstname.$dirty && form.firstname.$error.required }">
+					<label class = 'col-sm-3 control-label' for="firstname">First name</label>
+					<p class="form-control-static">{{vm.user.firstname}}</p>
+					
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': form.lastname.$dirty && form.lastname.$error.required }">
+					<label class = 'col-sm-3 control-label' for="lastname">Last name</label>
+					<p class="form-control-static">{{vm.user.lastname}}</p>
+					
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': form.email.$dirty && (form.email.$error.required || form.email.$error.email) }">
+					<label class = 'col-sm-3 control-label' for="email">Email</label>
+					<p class="form-control-static">{{vm.user.email}}</p>
+					
+				</div>
+				<div class = 'form-group'>
+					<label class = 'col-sm-3 control-label' for='newsletter'>Newsletter</label>
+					<div class = 'checkbox col-sm-9'>
+						<input type = 'checkbox' class = 'input-form' ng-model = 'vm.user.newsletter' ng-true-value='"Y"' ng-false-value='"N"'>
+						<span ng-if = 'vm.user.newsletter=="Y"'>YES, I would like to receive {{vm.siteTitle}} news by email.</span>
+						<span ng-if = 'vm.user.newsletter=="N"'>NO, I do not want to receive {{vm.siteTitle}} news by email.</span>
+					</div>
+				</div>
+				
+
+				<div class="form-group" access = 'admin'>
+					<label class = 'col-sm-3 control-label' for="is_admin">Is admin</label>
+					<div class = 'checkbox col-sm-6'><input type="checkbox" id="is_admin" ng-true-value = '"Y"' ng-false-value = '"N"' ng-model = 'vm.user.is_admin'></div>
+				</div>
+				<div class="form-group" access = 'admin'>
+					<label class = 'col-sm-3 control-label' for="is_active">Is active</label>
+					<div class = 'checkbox col-sm-6'><input type="checkbox" id="is_active" ng-true-value = '"Y"' ng-false-value = '"N"' ng-model = 'vm.user.is_active'></div>
+				</div>
+				<div  class="form-group" access = 'admin'>
+									<label class = 'col-sm-3 control-label' for="is_editor">Is editor</label>
+									<div class = 'checkbox col-sm-6'><input type="checkbox" id="is_editor" ng-true-value = '"Y"' ng-false-value = '"N"' ng-model = 'vm.user.is_editor'></div>
+								</div>
+
+				<div class="form-group">
+					<div class = 'col-sm-6 col-sm-offset-3'>
+						<button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Update account</button>
+						<a href="#/form" class="btn btn-link">Back DMP Canvas Generator</a>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+

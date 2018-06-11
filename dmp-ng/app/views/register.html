@@ -1,0 +1,76 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class="col-md-10 col-md-offset-1">
+	<h3>Welcome to the {{vm.siteTitle}} platform</h3>
+	<div class = 'panel panel-default' style = 'margin-top: 50px;'>
+		<div class = 'panel-heading'>
+			<div class = 'panel-title'>Registration</div>
+		</div>
+		<div class = 'panel-body'>
+			<form novalidate name="form" ng-submit="vm.register()" role="form" class = 'form-horizontal'>
+				<div class="form-group" ng-class="{ 'has-error': form.login.$dirty && form.login.$error.required }">
+					<label class = 'col-sm-3 control-label' for="login">Login name</label>
+					<div class = 'col-sm-6'><input type="text" name="login" id="login" class="form-control" ng-model="vm.user.login" required /></div>
+					<div class = 'col-sm-3'><span ng-show="form.login.$dirty && form.login.$error.required" class="help-block">Login name is required</span></div>
+				</div>
+
+				<div class="form-group" ng-class="{ 'has-error': form.firstname.$dirty && form.firstname.$error.required }">
+					<label class = 'col-sm-3 control-label' for="firstname">First name</label>
+					<div class = 'col-sm-6'><input type="text" name="firstname" id="firstname" class="form-control" ng-model="vm.user.firstname" required /></div>
+					<div class = 'col-sm-3'><span ng-show="form.firstname.$dirty && form.firstname.$error.required" class="help-block">First name is required</span></div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': form.lastname.$dirty && form.lastname.$error.required }">
+					<label class = 'col-sm-3 control-label' for="lastname">Last name</label>
+					<div class = 'col-sm-6'><input type="text" name="lastname" id="lastname" class="form-control" ng-model="vm.user.lastname" required /></div>
+					<div class = 'col-sm-3'><span ng-show="form.lastname.$dirty && form.lastname.$error.required" class="help-block">Last name is required</span></div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': form.email.$dirty && (form.email.$error.required || form.email.$error.email) }">
+					<label class = 'col-sm-3 control-label' for="email">Email</label>
+					<div class = 'col-sm-6'><input type="email" name="email" id="email" class="form-control" ng-model="vm.user.email" required /></div>
+					<div class = 'col-sm-3'><span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span></div>
+					<div class = 'col-sm-3'><span ng-show="form.email.$dirty && form.email.$error.email" class="help-block">Email is not valid</span></div>
+				</div>
+				
+				
+
+				<div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+					<label class = 'col-sm-3 control-label' for="password">Password</label>
+					<div class = 'col-sm-6'><input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password" required /></div>
+					<div class = 'col-sm-3'><span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span></div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': form.password2.$dirty && form.password2.$error.compareTo }">
+					<label class = 'col-sm-3 control-label' for="password2">Confirm password</label>
+					<div class = 'col-sm-6'><input type="password" name="password2" id="password2" class="form-control" ng-model="vm.user.password2" required compare-to='vm.user.password'/></div>
+					<div class = 'col-sm-3'><span ng-show="form.password2.$dirty && form.password2.$error.compareTo" class="help-block">Password not confirmed</span></div>
+				</div>
+				<div class="form-group">
+					<div class = 'col-sm-6 col-sm-offset-3'>
+						<button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Register</button>
+						<a href="#/login" class="btn btn-link">Cancel</a>
+
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
