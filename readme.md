@@ -199,7 +199,7 @@ Replace DMP Canvas Generator with the new name.
 
 
 ```javascript
-		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+		<!-- Google Analytics: change UA-XXXXX-X to be your site s ID -->
 		<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -227,8 +227,6 @@ By default, an *admin* account is created with:
 You should be able to log in and access the `News` section.
 
 ![news page](documentation/images/news_page.png)
-
-##add a part on the login 
 
 ## Deployment
 To deploy the DMP Canvas Generator instance on a production server, `grunt` is used to package the front-end and minify its code. 
