@@ -217,7 +217,7 @@ Replace DMP Canvas Generator with the new name.
 ### Testing
 The login interface should be displayed in the browser window:
 
-![login page](images/login_page.png)
+![login page](documentation/images/login_page.png)
 
 By default, an *admin* account is created with:
 
@@ -226,7 +226,7 @@ By default, an *admin* account is created with:
 
 You should be able to log in and access the `News` section.
 
-![news page](images/news_page.png)
+![news page](documentation/images/news_page.png)
 
 ##add a part on the login 
 
