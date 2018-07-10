@@ -18,7 +18,7 @@ The source code of both parts is versioned using GIT and hosted at [https://gith
 
 > _Prerequisite: The server should have a web server (the system has been tested with Apache) with PHP >=5.6 and the PHP-PDO module installed._
 
-The SIB GitHub repository of the DMP Canvas Generator back-end is: `git://https://github.com/vitalit-sib/vitalit-sib-DMP/tree/master/dmp-backend.git`
+The SIB GitHub repository of the DMP Canvas Generator back-end is: `https://github.com/vitalit-sib/vitalit-sib-DMP/tree/master/dmp-backend.git`
 
 To install it: 
 ```bash
@@ -29,7 +29,7 @@ git clone https://github.com/vitalit-sib/vitalit-sib-DMP.git
 
 From now on the path of the newly created `dmp` folder will be  referred as:`<path-to-dmp-root>`-
 
-The cloning create a `dmp-backend` directory which contains for directories:
+The cloning creates a `dmp-backend` directory which contains four directories:
 
 -   **conf:** contains the configuration file config.php
 -   **data:** contains a MySQL dump script (dmp.sql)
@@ -37,7 +37,7 @@ The cloning create a `dmp-backend` directory which contains for directories:
 -   **tools:** contains two files: `db.inc.php` host the initialisation of the database connection. `include.php` contains generic functions.
 -   **GIT:** contains the function specific to the version of the web application available on gitHub.
 
-A tutorial to create a Virtual host is available: [https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts)
+A tutorial to create an Apache virtual host is available: [https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts)
 
 In order to setup the system, one has to edit the `conf/config.php` file to match the server configuration.
 
@@ -85,7 +85,7 @@ If DMP Canvas Generator is used with a MySQL database, one has to change the DBT
 
 **IMPORTANT:** be sure that the DATA\_PATH is writable by the web server (apache) user.
 
-A part of this web application is based on [ViKM (version 2)](http://www.vital-it.ch/research/software/ViKM). All ViKM database connections are managed by [Medoo framework](http://medoo.in/). This framework supports various SQL databases. Database connections specific to the DMP Canvas Generator are coded in MySQL with [Meekro](http://www.meekro.com) which offers an easier interface and supports advanced, MySQL specific features. DMP Canvas Generator uses the
+A part of this web application is based on [ViKM (version 2)](http://www.vital-it.ch/research/software/ViKM). All ViKM database connections are managed by [Medoo framework](http://medoo.in/). This framework supports various SQL databases. Database connections specific to the DMP Canvas Generator are coded in MySQL with [Meekro](http://www.meekro.com) which offers an easier interface and supports advanced, MySQL specific features.
 
 DMP Canvas Generator uses the [SLIM PHP Framework (version 2)](http://www.slimframework.com/) to handle the routing of the RESTful application.
 
@@ -123,7 +123,7 @@ bower install;
 ```
 
 This will install modules in two folders;`node_modules` and `bower components`.
-The html, JavaScript and css files of the application are in the `app` folder.
+The HTML, JavaScript and CSS files of the application are in the `app` folder.
 
 The development and deployment of the front-end is managed by Grunt. The included Gruntfile.js can be customized to fit your settings: especially, the `constants->serverURL`. In the following example, we assume that a virtual host named 'dmp' points to `<path-to-dmp-root>/dmp-backend/htdocs`.
  
