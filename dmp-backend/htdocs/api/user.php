@@ -17,8 +17,6 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>
 *
 *****************************************************************/
-require '../../GIT/gitHub.php';
-
 
 
 /**
@@ -102,78 +100,46 @@ function listUsers($loggedLogin, $loggedCode){
 }
 
 
+/**
+ * login
+ *
+ * Checks login. Update reset password if activation_code is used as password.
+ *
+ * @param array $request
+ * @return array
+ * @author Robin
+ */
 
-function ldap_login($user){
+function loginGitHub($request){
 	
-	if(GIT == 'gitlab'){
+
+	$users = $GLOBALS['DB']->select(
+	"users",
+	array("user_id", "firstname", "lastname", "login", "email", "is_active","is_editor", "is_admin", "code", "is_password_reset", "password"),
+	array("login" => $request['username']));
+
+
+	foreach($users as $user){
 		
-		$login = $user['username'];
-		$password = $user['password'];
-		$ldap = array(
-				'server' => "ldaps://ldap.vital-it.ch:636/",
-				'dn' => "ou=People,dc=vital-it,dc=isb-sib,dc=ch"
-			);
-
-		$ds=ldap_connect($ldap['server']);
-		
-
-		if(!$ds){
-			throw new Exception("Unable to contact authentication server",501);
+		if(password_verify($request['password'],$user['password'])){
+			if($user['is_active'] == 'D') throw new Exception("ERROR: account has been rejected", 501);
+			if($user['is_active'] == 'N') throw new Exception("ERROR: the account request has NOT yet been reviewed.", 501);
+			if($user['is_password_reset'] == 'Y'){
+				$GLOBALS['DB']->update('users',array('is_password_reset' => 'N'),array('user_id' => $user['user_id']));
+				$user['is_password_reset'] = 'N';
+			}
+			break;
 		}
-		$sr=ldap_search($ds, $ldap['dn'], "uid=$login");
-		// Verify that we get exactly one entry
-		if (ldap_count_entries($ds, $sr) != 1){
-			throw new Exception("Invalid login",501);
+		elseif($user['activation_code'] == $request['password'] && $user['is_password_reset'] == 'Y'){
+			break;
 		}
-		$user_ldap_id = ldap_first_entry($ds, $sr);
-		$user_dn=ldap_get_dn($ds, $user_ldap_id);
-		$r = @ldap_bind($ds, $user_dn, $password);
-		
-
-		if(!$r){
-			throw new Exception("Invalid password",501);
-		}
-		$user = ldap_get_entries($ds,$sr)[0];
-		if(!$user) throw new Exception("Unknown user",401);
-		$current_time = time() / 3600 / 24;
-		if(isset($user['shadowExpire']) && $user['shadowExpire'][0] <= $current_time) throw new Exception("User account in NOT active", 501);
-
-
-		$firstnameLastname = explode(" ", $user['cn'][0]);
-		$firstname = $firstnameLastname[0];
-		$lastname = $firstnameLastname[1];
-		$institution = "SIB";
-		$userDMP = DB::queryFirstRow("SELECT * from users
-			where login = %s and firstname = %s and lastname = %s and email = %s",$login,$firstname,$lastname,$user['mail'][0]);
-		if(empty($userDMP)){
-			$insertUser =array(
-			  'login' => $login,
-			  'firstname' => $firstname ,
-			  'lastname' => $lastname,
-			  'password' => $password,
-			  'institution' => "",
-			  'email' => $user['mail'][0],
-			);
-
-			$userDMP = register($insertUser,TRUE);
-		
-			return $userDMP;
-
-		}
-
+		else unset($user);
 	}
-	else{
-		$userDMP = loginGitHub($user);
-
-	}
-
-
-
-
-	return process($userDMP);
+	if(!isset($user) || !$user) throw new Exception("ERROR: invalid username / password", 501);
+	unset($user['password']);
+	return process($user);
+	
 }
-
-
 
 
 /**
@@ -323,4 +289,11 @@ function resetPassword($email){
 	return true;
 }
 
+function check_password_syntax($password){
+	if(strlen($password) < 8) throw new Exception("ERROR: the length of the password should be at least 8 characters", 501);
+	if(!preg_match("/[0-9]/",$password)) throw new Exception("ERROR: the password must contain at least one numerical character", 501);
+	if(!preg_match("/[a-z]/",$password)) throw new Exception("ERROR: the password must contain at least one lowercase character", 501);
+	if(!preg_match("/[A-Z]/",$password)) throw new Exception("ERROR: the password must contain at least one uppercase character", 501);
+	return true;
+}
 ?>

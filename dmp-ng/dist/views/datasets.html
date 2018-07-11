@@ -17,4 +17,30 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>
 *
 *****************************************************************/
---> <div class="container-fluid"> <div> <p class="text-right"><button class="btn btn-primary btn-sm" ng-click="vm.initExperiment()">new dataset</button></p> </div> <div class="panel panel-default"> <div class="panel-heading"> <div class="panel-title">Datasets of {{vm.project.name}}</div> </div> <table class="table table-hover" st-table> <thead> <th st-sort="name">Name <th st-sort="user">User <th st-sort="date">Date  <tbody> <tr ng-repeat="dataset in vm.datasets" ng-click="vm.goTo(dataset.dataset_id)" class="pointer"> <td>{{dataset.name}} <td><b>{{dataset.user_name}}</b><br>{{dataset.group_name}} <td>{{dataset.timestamp}}   </table> </div> </div>
+-->
+
+<div class = 'container-fluid'>
+	<div>
+		<p class = 'text-right'><button class = 'btn btn-primary btn-sm' ng-click = 'vm.initExperiment()'>new dataset</button></p>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="panel-title">Datasets of {{vm.project.name}}</div>
+		</div>
+		<table class = 'table table-hover' st-table>
+			<thead>
+				<th st-sort='name'>Name</th>
+				<th st-sort='user'>User</th>
+				<th st-sort='date'>Date</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat = 'dataset in vm.datasets' ng-click = 'vm.goTo(dataset.dataset_id)' class = 'pointer'>
+					<td>{{dataset.name}}</td>
+					<td><b>{{dataset.user_name}}</b><br>{{dataset.group_name}}</td>
+					<td>{{dataset.timestamp}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>

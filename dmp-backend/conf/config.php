@@ -16,15 +16,11 @@ if(!defined('TMP_PATH')) define('TMP_PATH',"/tmp");
 if(!defined("DBTYPE")) define("DBTYPE","mysql");
 
 // For MySQL connection
-// if(!defined("DBBASE")) define("DBBASE","mysql_database");
-// if(!defined("DBSERVER")) define("DBSERVER","mysql_server");
+
+// if(!defined("DBBASE")) define("DBBASE","dmp_github");
+// if(!defined("DBSERVER")) define("DBSERVER","127.0.0.1");
 // if(!defined("DBNAME")) define("DBNAME","mysql_username");
 // if(!defined("DBPWD")) define("DBPWD","mysql_user_password");
-
-if(!defined("DBBASE")) define("DBBASE","dmp_github");
-if(!defined("DBSERVER")) define("DBSERVER","127.0.0.1");
-if(!defined("DBNAME")) define("DBNAME","mysql_username");
-if(!defined("DBPWD")) define("DBPWD","mysql_user_password");
 
 // For Sqlite3 connection. Path to the DB file
 if(!defined("DBFILE")) define("DBFILE",DATA_PATH."/database.sqlite");

@@ -17,4 +17,29 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>
 *
 *****************************************************************/
---> <div class="container"> <div access="editor"> <p class="text-right"><button class="btn btn-primary btn-sm" ng-click="vm.initNews()" ng-show="!vm.showNew">add news</button></p> </div> <h3> {{(vm.newsIsActive=="Y")?"Recent":"Unpublished"}} news from {{vm.siteTitle}} <button ng-if="(nbU = (vm.news|filter:{active:&quot;N&quot;}).length) > 0 && vm.newsIsActive==&quot;Y&quot;" class="btn btn-default btn-xs pull-right" ng-click="vm.newsIsActive=(vm.newsIsActive==&quot;Y&quot;)?&quot;N&quot;:&quot;Y&quot;">show {{nbU}} unpublished news</button> <button ng-if="(nbP = (vm.news|filter:{active:&quot;Y&quot;}).length) > 0 && vm.newsIsActive==&quot;N&quot;" class="btn btn-default btn-xs pull-right" ng-click="vm.newsIsActive=(vm.newsIsActive==&quot;Y&quot;)?&quot;N&quot;:&quot;Y&quot;">show {{nbP}} published news</button> </h3> <div class="panel panel-default" ng-repeat="info in vm.news | filter:{active:vm.newsIsActive}"> <div class="panel-heading"> <div class="panel-title"> <i ng-if="info.active==&quot;N&quot;" class="text-muted">[Not published]</i> <span ng-class="(info.active==&quot;Y&quot;)?&quot;&quot;:&quot;text-muted&quot;">{{info.title}}</span> <a ng-href="#/news/{{info.news_id}}" class="pull-right glyphicon glyphicon-pencil pointer" access="admin" ng-if="!info.institution_name"></a> <a ng-href="#/news/{{info.news_id}}" class="pull-right glyphicon glyphicon-pencil pointer" access="editor" ng-if="info.institution_name"></a> </div> </div> <div class="panel-body" ng-class="(info.active==&quot;Y&quot;)?&quot;&quot;:&quot;text-muted&quot;" ng-bind-html="info.content"></div> <div class="panel-footer text-right"><small class="text-muted">Published by {{info.firstname+" "+info.lastname}} on {{info.timestamp}}</small></div> </div> </div>
+-->
+
+<div class = 'container'>
+	<div access="editor">
+		<p class = 'text-right'><button class = 'btn btn-primary btn-sm' ng-click = 'vm.initNews()' ng-show = '!vm.showNew'>add news</button></p>
+	</div>
+	<h3>
+		{{(vm.newsIsActive=="Y")?"Recent":"Unpublished"}} news from {{vm.siteTitle}}
+		<button ng-if = '(nbU = (vm.news|filter:{active:"N"}).length) > 0 && vm.newsIsActive=="Y"' class='btn btn-default btn-xs pull-right' ng-click='vm.newsIsActive=(vm.newsIsActive=="Y")?"N":"Y"'>show {{nbU}} unpublished news</button>
+		<button ng-if = '(nbP = (vm.news|filter:{active:"Y"}).length) > 0 && vm.newsIsActive=="N"' class='btn btn-default btn-xs pull-right' ng-click='vm.newsIsActive=(vm.newsIsActive=="Y")?"N":"Y"'>show {{nbP}} published news</button>
+	</h3>
+	<div class="panel panel-default" ng-repeat = 'info in vm.news | filter:{active:vm.newsIsActive}'>
+		<div class="panel-heading">
+			<div class="panel-title">
+				<i ng-if = 'info.active=="N"' class='text-muted'>[Not published]</i> <span ng-class = '(info.active=="Y")?"":"text-muted"'>{{info.title}}</span>
+				<a ng-href = '#/news/{{info.news_id}}' class = 'pull-right glyphicon glyphicon-pencil pointer' access = 'admin' ng-if="!info.institution_name"></a>
+				<a ng-href = '#/news/{{info.news_id}}' class = 'pull-right glyphicon glyphicon-pencil pointer' access = 'editor' ng-if="info.institution_name"></a>
+			</div>
+
+		</div>
+		<div class="panel-body" ng-class = '(info.active=="Y")?"":"text-muted"' ng-bind-html = 'info.content'></div>
+
+		<div class = 'panel-footer  text-right'><small class = 'text-muted'>Published by {{info.firstname+" "+info.lastname}} on {{info.timestamp}}</small></div>
+	</div>
+
+</div>

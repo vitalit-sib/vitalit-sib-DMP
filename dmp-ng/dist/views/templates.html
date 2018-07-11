@@ -1,4 +1,317 @@
-<div class="container-fluid" access="editor"> <div class="row"> <div ng-class="(!vm.showPreview) ? &quot;col-sm-6 col-sm-offset-3&quot; : &quot; col-sm-6&quot;"> <button class="pull-right btn btn-primary" ng-click="vm.openHelp()">Help</button> <h3>Template editor for {{vm.institution|uppercase}}</h3> <div class="panel panel-default"> <div class="panel-body"> <p>The template editor allows to have institution specific texts in the Word file produced by the DMP Canvas Generator. Each section number corresponds to the section titles in the Word document and, consequently, to the SNSF sections for DMP creation.</p> <div class="dropdown" style="margin-bottom:15px;margin-top:15px"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{vm.section_button}} <span class="caret"></span></button> <ul class="dropdown-menu"> <li ng-repeat="(section, text_info) in vm.templates | noSubtitles"> <a style="cursor: pointer" ng-click="vm.select_section(text_info.section_number,text_info.title )">{{text_info.section_number}} {{text_info.title}}</a> </li></ul> </div> <div ng-if="vm.section"> <div class="lead">{{vm.templates[vm.section].title}}</div> <label>A) Introductory text</label> <div uib-alert class="alert alert-danger" ng-if="vm.alertOK == false" close="vm.alertOK = true"> <p>Please do not modify any terms enclosed in curly brackets "{ }" in the text. If you still wish to modify these variables, please read the documentation provided <a href="#/documentation" target="_blank">here</a>.</p> <p>Advanced users can add texts dependent on a variable in the introduction or/and in the conclusion as described in the <a href="#/documentation#header_footer" target="_blank">documentation</a>. </p> <p>All texts placed between square brackets "[ ]" will be displayed in red in the word document as comments</p> </div> <div class="row"> <div class="col-md-9"> <textarea class="form-control" rows="3" ng-model="vm.templates[vm.section].heading_user" style="min-height:100px" ng-change="vm.previewFormatting()"></textarea> </div> <div class="col-md-3"> <button class="btn btn-xs btn-info" style="margin-top: 5px" ng-click="vm.toggleTemplate(vm.templates[vm.section],'heading')" ng-show="vm.templates[vm.section].heading_institution && vm.templates[vm.section].heading
-                        && vm.templates[vm.section].heading != vm.templates[vm.section].heading_institution"> Revert to {{vm.templates[vm.section].changeToHeader|uppercase}} template </button> <button class="btn btn-xs btn-default" style="margin-top: 5px" ng-click="vm.resetChanges(vm.templates[vm.section],'heading')" ng-show="vm.isResetChanges(vm.templates[vm.section],'heading') || vm.templates[vm.section].isReset"> Reset changes </button> </div> </div><hr> <label>B) Text related to the selected parameter</label> <!--Actual section--> <div class="dropdown" style="margin-bottom:15px;margin-top:15px"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{vm.templates[vm.section].selected|formatNot}} <span class="caret"></span></button> <ul class="dropdown-menu"> <li ng-repeat="(parameter, text) in vm.templates[vm.section].templates"> <a style="cursor: pointer" ng-click="vm.select_parameter(parameter, vm.templates[vm.section])">{{parameter|formatNot}}</a> </li></ul> </div> <div ng-if="vm.showTextBox"> <div class="row"> <div class="col-md-9"> <textarea class="form-control" rows="3" ng-model="vm.templates[vm.section].templates[vm.templates[vm.section].selected].text_user" style="min-height:100px" ng-change="vm.previewFormatting()"></textarea> </div> <div class="col-md-3"> <button class="btn btn-xs btn-info" style="margin-top: 5px" ng-click="vm.toggleTemplate(vm.templates[vm.section].templates[vm.templates[vm.section].selected],'text')" ng-show="vm.templates[vm.section].templates[vm.templates[vm.section].selected].text
-                          && vm.templates[vm.section].templates[vm.templates[vm.section].selected].text_institution"> Revert to {{vm.templates[vm.section].templates[vm.templates[vm.section].selected].changeToText|uppercase}} template </button> <button class="btn btn-xs btn-default" style="margin-top: 5px" ng-click="vm.resetChanges(vm.templates[vm.section].templates[vm.templates[vm.section].selected],'text')" ng-show="vm.isResetChanges(vm.templates[vm.section].templates[vm.templates[vm.section].selected],'text') || vm.templates[vm.section].templates[vm.templates[vm.section].selected].isReset"> Reset changes </button> </div> </div> </div> <!--All subsections--> <div ng-repeat="param in vm.templates" ng-if="(param.section_number_parent == vm.section)"> <div class="dropdown" style="margin-bottom:15px;margin-top:15px"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> {{param.selected|formatNot}} <span class="caret"></span></button> <ul class="dropdown-menu"> <li ng-repeat="(parameter, text) in param.templates"> <a style="cursor: pointer" ng-click="vm.select_parameter(parameter, param)">{{parameter|formatNot}}</a> </li></ul> </div> <div ng-if="vm.showTextBox"> <div class="row"> <div class="col-md-9"> <textarea class="form-control" rows="3" ng-model="param.templates[param.selected].text_user" style="min-height:100px" ng-change="vm.previewFormatting()"></textarea> </div> <div class="col-md-3"> <button class="btn btn-xs btn-info" style="margin-top: 5px" ng-click="vm.toggleTemplate(param.templates[param.selected],'text')" ng-show="param.templates[param.selected].text && param.templates[param.selected].text_institution"> Revert to {{param.templates[param.selected].changeToText|uppercase}} template </button> <button class="btn btn-xs btn-default" style="margin-top: 5px" ng-click="vm.resetChanges(param.templates[param.selected],'text')" ng-show="vm.isResetChanges(param.templates[param.selected],'text') || param.templates[param.selected].isReset"> Reset changes </button> </div> </div> </div> </div> <!-- <button type="button" class="btn btn-default " ng-click="vm.footer = true;" ng-if="!vm.templates[vm.section].footer">Add concluding sentence</button> --> <hr> <div> <label>C) Concluding text</label> <div class="row"> <div class="col-md-9"> <textarea class="form-control" rows="3" ng-model="vm.templates[vm.section].footer_user" style="min-height:100px" ng-change="vm.previewFormatting()"></textarea> </div> <div class="col-md-3"> <button class="btn btn-xs btn-info" style="margin-top: 5px" ng-click="vm.toggleTemplate(vm.templates[vm.section],'footer')" ng-show="vm.templates[vm.section].footer_institution && vm.templates[vm.section].footer
-                          && vm.templates[vm.section].footer != vm.templates[vm.section].footer_institution"> Revert to {{vm.templates[vm.section].changeToFooter|uppercase}} template </button> <button class="btn btn-xs btn-default" style="margin-top: 5px" ng-click="vm.resetChanges(vm.templates[vm.section],'footer')" ng-show="vm.isResetChanges(vm.templates[vm.section],'footer') || vm.templates[vm.section].isReset"> Reset changes </button> </div> </div> </div> </div> </div> <div class="panel-footer"> <div class="text-center"> <div class="btn-group"> <button type="button" class="btn btn-success" ng-click="vm.saveTemplates();vm.showButton = false" ng-if="vm.showButton">Confirm </button> <button type="button" class="btn btn-danger" ng-click="vm.showButton =false" ng-if="vm.showButton"> Cancel </button> </div> <button type="button" class="btn btn-success" ng-click="vm.showButton = true" ng-if="!vm.showButton">Save </button> <button type="button" class="btn btn-default" ng-click="vm.showPreview = !vm.showPreview">Preview</button> <!-- <a class="btn btn-outline-dark"  target="_blank" href="#/preview" role="button" >Preview</a> --> </div> </div> </div> <h3>Recommendation editor for {{vm.institution|uppercase}}</h3> <div class="panel panel-default" ng-if="vm.recommendation"> <div class="panel-body"> <p>The recommendation editor allows institutions to add recommended selections for their users (for example recommended security standards, licenses). In addition, it provides the possibility to filter the available choices in the questionnaire.</p> <div class="dropdown" style="margin-bottom:15px;margin-top:15px"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> {{vm.parameter_type_button.replace("_"," ")}} <span class="caret"></span></button> <ul class="dropdown-menu"> <li ng-repeat="(type, parameters) in vm.recommendation.parameter_types"> <a style="cursor: pointer" ng-click="vm.select_parameter_type(type)">{{type.replace("_"," ")}}</a> </li></ul> </div> <div ng-if="vm.type"> <table class="table"> <tbody> <tr ng-repeat="(index,params) in vm.recommendation.parameter_types[vm.type]"> <td>{{params.abbreviation}} <td ng-show="params.recommendation_id == 1 "> <button class="btn btn-xs btn-default" style="background: lightgrey" ng-click="vm.changeRecommendation(params)">not displayed</button>  <td ng-show="params.recommendation_id == 1 "> <button class="btn btn-xs btn-default" style="background: lightgrey" ng-click="vm.changeRecommendation(params)">not recommended</button>  <td ng-show="params.recommendation_id == 2 "> <button class="btn btn-xs btn-default" ng-click="vm.changeRecommendation(params,1)">displayed</button>  <td ng-show="params.recommendation_id == 2 "> <button class="btn btn-xs btn-default" ng-click="vm.changeRecommendation(params)">recommended</button>  <td ng-show="params.recommendation_id == null "> <button class="btn btn-xs btn-default" ng-click="vm.changeRecommendation(params,1)">displayed</button>  <td ng-show="params.recommendation_id == null "> <button class="btn btn-xs btn-default" style="background: lightgrey" ng-click="vm.changeRecommendation(params,2)">not recommended</button>     </table> </div> </div> <div class="panel-footer"> <button type="button" class="btn btn-success center-block" ng-click="vm.saveRecommendation()">Save</button> </div> </div> <h3>Form editor for {{vm.institution|uppercase}}</h3> <div class="panel panel-default"> <div class="panel-body"> <p> The form editor allows institutions to modify the about and/or contact part of questionnaire. In order to modify those chapters, one need to know markdown. A help can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links" target="_blank">here</a>. </p> <div class="row"> <div class="col-md-9"> <label>About</label> <textarea class="form-control" rows="3" ng-model="vm.aboutContact.about" style="min-height:100px" ng-change="vm.previewFormatting()"></textarea> <label>Contact</label> <textarea class="form-control" rows="3" ng-model="vm.aboutContact.contact" style="min-height:100px" ng-change="vm.previewFormatting()"></textarea> </div> </div> </div> <div class="panel-footer"> <button type="button" class="btn btn-success center-block" ng-click="vm.saveAboutContact()">Save</button> </div> </div> </div> </div> <div class="col-sm-6" ng-if="vm.showPreview"> <h3> Template preview <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="vm.showPreview = !vm.showPreview"><i class="fa fa-times" aria-hidden="true"></i></button> </h3> <div class="panel panel-default" style="max-height: 80vh;overflow-y: auto"> <div class="panel-body"> <div ng-repeat="(section_number,titles_and_templates) in vm.templates_preview"> <h4 ng-if="titles_and_templates.title"> {{section_number}} {{titles_and_templates.title}}</h4> <p><span ng-bind-html="vm.trustAsHtml(titles_and_templates.heading)"></span></p> <span ng-if="titles_and_templates.title "> <p ng-repeat="templates in titles_and_templates.templates"> <span ng-bind-html="vm.trustAsHtml(templates.text)"></span></p></span>  <span ng-repeat="section_content in vm.templates_preview"> <span ng-if="section_content.section_number_parent  == titles_and_templates.section_number "> <p ng-repeat="templates in section_content.templates"><span ng-bind-html="vm.trustAsHtml(templates.text)"></span></p> </span> </span> <p><span ng-bind-html="vm.trustAsHtml(titles_and_templates.footer)"></span></p> </div> </div> <div class="panel-footer text-center"> <button type="button" class="btn btn-danger btn-sm" ng-click="vm.showPreview = !vm.showPreview">close preview </button> </div> </div> </div> </div> 
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+<div class='container-fluid' access='editor'>
+  <div class="row">
+    <div ng-class='(!vm.showPreview) ? "col-sm-6 col-sm-offset-3" : " col-sm-6"'>
+      <button class='pull-right btn btn-primary' ng-click='vm.openHelp()'>Help</button>
+      <h3>Template editor for {{vm.institution|uppercase}}</h3>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>The template editor allows to have institution specific texts in the Word file produced by the DMP Canvas
+          Generator. Each section number corresponds to the section titles in the Word document and, consequently, to
+          the SNSF sections for DMP creation.</p>
+
+          <div class="dropdown" style="margin-bottom:15px;margin-top:15px">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{vm.section_button}}
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li ng-repeat="(section, text_info) in vm.templates | noSubtitles">
+                <a style="cursor: pointer" ng-click="vm.select_section(text_info.section_number,text_info.title )">{{text_info.section_number}} {{text_info.title}}</a>
+            </ul>
+          </div>
+
+          <div ng-if="vm.section">
+            <div class="lead">{{vm.templates[vm.section].title}}</div>
+            <label>A) Introductory text</label>
+            <div uib-alert class="alert alert-danger" ng-if="vm.alertOK == false" close="vm.alertOK = true">
+              <p>Please do not modify any terms enclosed in curly brackets "{ }" in the text. If you still wish to modify these variables,
+              please read the documentation provided <a href="#/documentation" target="_blank">here</a>.</p>
+
+			  <p>Advanced users can add texts dependent on a variable in the introduction or/and in the conclusion as described in the  <a href="#/documentation#header_footer" target="_blank">documentation</a>.  </p>
+
+              <p>All texts placed between square brackets "[ ]" will be displayed in red in the word document as comments</p>
+            </div>
+            <div class="row">
+              <div class="col-md-9">
+                <textarea class="form-control" rows="3" ng-model="vm.templates[vm.section].heading_user"
+                          style="min-height:100px" ng-change="vm.previewFormatting()"></textarea>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-xs btn-info" style="margin-top: 5px"
+                        ng-click="vm.toggleTemplate(vm.templates[vm.section],'heading')"
+                        ng-show="vm.templates[vm.section].heading_institution && vm.templates[vm.section].heading
+                        && vm.templates[vm.section].heading != vm.templates[vm.section].heading_institution">
+                  Revert to {{vm.templates[vm.section].changeToHeader|uppercase}} template
+                </button>
+                <button class="btn btn-xs btn-default" style="margin-top: 5px"
+                        ng-click="vm.resetChanges(vm.templates[vm.section],'heading')"
+                        ng-show="vm.isResetChanges(vm.templates[vm.section],'heading') || vm.templates[vm.section].isReset">
+                  Reset changes
+                </button>
+              </div>
+            </div><hr>
+
+            <label>B) Text related to the selected parameter</label>
+<!--Actual section-->
+            <div class="dropdown" style="margin-bottom:15px;margin-top:15px">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{vm.templates[vm.section].selected|formatNot}}
+                <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="(parameter, text) in vm.templates[vm.section].templates">
+                  <a style="cursor: pointer" ng-click="vm.select_parameter(parameter, vm.templates[vm.section])">{{parameter|formatNot}}</a>
+              </ul>
+            </div>
+            <div ng-if="vm.showTextBox">
+              <div class="row">
+                <div class="col-md-9">
+                  <textarea class="form-control" rows="3"
+                            ng-model="vm.templates[vm.section].templates[vm.templates[vm.section].selected].text_user" style="min-height:100px"
+                            ng-change="vm.previewFormatting()"></textarea>
+                </div>
+                <div class="col-md-3">
+                  <button class="btn btn-xs btn-info" style="margin-top: 5px"
+                          ng-click="vm.toggleTemplate(vm.templates[vm.section].templates[vm.templates[vm.section].selected],'text')"
+                          ng-show="vm.templates[vm.section].templates[vm.templates[vm.section].selected].text
+                          && vm.templates[vm.section].templates[vm.templates[vm.section].selected].text_institution">
+                    Revert to {{vm.templates[vm.section].templates[vm.templates[vm.section].selected].changeToText|uppercase}} template
+                  </button>
+                  <button class="btn btn-xs btn-default" style="margin-top: 5px"
+                          ng-click="vm.resetChanges(vm.templates[vm.section].templates[vm.templates[vm.section].selected],'text')"
+                          ng-show="vm.isResetChanges(vm.templates[vm.section].templates[vm.templates[vm.section].selected],'text') || vm.templates[vm.section].templates[vm.templates[vm.section].selected].isReset">
+                    Reset changes
+                  </button>
+                </div>
+              </div>
+            </div>
+
+<!--All subsections-->
+            <div ng-repeat="param in vm.templates" ng-if="(param.section_number_parent == vm.section)">
+              <div class="dropdown" style="margin-bottom:15px;margin-top:15px">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                  {{param.selected|formatNot}}
+                  <span class="caret"></span></button>
+                <ul class="dropdown-menu" >
+                  <li ng-repeat="(parameter, text) in param.templates">
+                    <a style="cursor: pointer" ng-click="vm.select_parameter(parameter, param)">{{parameter|formatNot}}</a>
+                </ul>
+              </div>
+
+              <div ng-if="vm.showTextBox">
+                <div class="row">
+                  <div class="col-md-9">
+                    <textarea class="form-control" rows="3" ng-model="param.templates[param.selected].text_user" style="min-height:100px"
+                              ng-change="vm.previewFormatting()"></textarea>
+                  </div>
+                  <div class="col-md-3">
+                    <button class="btn btn-xs btn-info" style="margin-top: 5px"
+                            ng-click="vm.toggleTemplate(param.templates[param.selected],'text')"
+                            ng-show="param.templates[param.selected].text && param.templates[param.selected].text_institution">
+                      Revert to {{param.templates[param.selected].changeToText|uppercase}} template
+                    </button>
+                    <button class="btn btn-xs btn-default" style="margin-top: 5px"
+                            ng-click="vm.resetChanges(param.templates[param.selected],'text')"
+                            ng-show="vm.isResetChanges(param.templates[param.selected],'text') || param.templates[param.selected].isReset">
+                      Reset changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- <button type="button" class="btn btn-default " ng-click="vm.footer = true;" ng-if="!vm.templates[vm.section].footer">Add concluding sentence</button> -->
+            <hr>
+            <div>
+              <label>C) Concluding text</label>
+              <div class="row">
+                <div class="col-md-9">
+                  <textarea class="form-control" rows="3" ng-model="vm.templates[vm.section].footer_user"
+                            style="min-height:100px" ng-change="vm.previewFormatting()"></textarea>
+                </div>
+                <div class="col-md-3">
+                  <button class="btn btn-xs btn-info" style="margin-top: 5px"
+                          ng-click="vm.toggleTemplate(vm.templates[vm.section],'footer')"
+                          ng-show="vm.templates[vm.section].footer_institution && vm.templates[vm.section].footer
+                          && vm.templates[vm.section].footer != vm.templates[vm.section].footer_institution">
+                    Revert to {{vm.templates[vm.section].changeToFooter|uppercase}} template
+                  </button>
+                  <button class="btn btn-xs btn-default" style="margin-top: 5px"
+                          ng-click="vm.resetChanges(vm.templates[vm.section],'footer')"
+                          ng-show="vm.isResetChanges(vm.templates[vm.section],'footer') || vm.templates[vm.section].isReset">
+                    Reset changes
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="text-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-success  " ng-click="vm.saveTemplates();vm.showButton = false"
+                      ng-if="vm.showButton">Confirm
+              </button>
+              <button type="button" class="btn btn-danger " ng-click="vm.showButton =false" ng-if="vm.showButton">
+                Cancel
+              </button>
+            </div>
+            <button type="button" class="btn btn-success " ng-click="vm.showButton = true" ng-if="!vm.showButton">Save
+            </button>
+            <button type="button" class="btn btn-default " ng-click="vm.showPreview = !vm.showPreview">Preview</button>
+
+            <!-- <a class="btn btn-outline-dark"  target="_blank" href="#/preview" role="button" >Preview</a> -->
+          </div>
+        </div>
+
+      </div>
+
+
+      <h3>Recommendation editor for {{vm.institution|uppercase}}</h3>
+      <div class="panel panel-default" ng-if="vm.recommendation">
+
+        <div class="panel-body">
+          <p>The recommendation editor allows institutions to add recommended selections for their users (for example
+          recommended security standards, licenses). In addition, it provides the possibility to filter the available
+          choices in the questionnaire.</p>
+
+          <div class="dropdown" style="margin-bottom:15px;margin-top:15px">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+              {{vm.parameter_type_button.replace("_"," ")}}
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li ng-repeat="(type, parameters) in vm.recommendation.parameter_types">
+                <a style="cursor: pointer" ng-click="vm.select_parameter_type(type)">{{type.replace("_"," ")}}</a>
+            </ul>
+          </div>
+          <div ng-if="vm.type">
+            <table class="table">
+              <tbody>
+              <tr ng-repeat="(index,params) in vm.recommendation.parameter_types[vm.type]">
+                <td>{{params.abbreviation}}</td>
+
+                <td ng-show="params.recommendation_id == 1 " >
+                  <button class="btn btn-xs btn-default" style="background: lightgrey" ng-click="vm.changeRecommendation(params)">not displayed</button>
+                </td>
+                <td ng-show="params.recommendation_id == 1 " >
+                  <button class="btn btn-xs btn-default" style="background: lightgrey" ng-click="vm.changeRecommendation(params)">not recommended</button>
+                </td>
+
+
+                <td ng-show="params.recommendation_id == 2 ">
+                  <button class="btn btn-xs btn-default" ng-click="vm.changeRecommendation(params,1)">displayed</button>
+                </td>
+                <td ng-show="params.recommendation_id == 2 " >
+                  <button class="btn btn-xs btn-default" ng-click="vm.changeRecommendation(params)">recommended</button>
+                </td>
+
+
+                <td ng-show="params.recommendation_id == null " >
+                  <button class="btn btn-xs btn-default" ng-click="vm.changeRecommendation(params,1)">displayed</button>
+                </td>
+                <td ng-show="params.recommendation_id == null " >
+                  <button class="btn btn-xs btn-default" style="background: lightgrey" ng-click="vm.changeRecommendation(params,2)">not recommended</button>
+                </td>
+                </label>
+
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+
+        </div>
+        <div class="panel-footer">
+          <button type="button" class="btn btn-success center-block" ng-click="vm.saveRecommendation()">Save</button>
+        </div>
+
+      </div>
+	  
+	  <h3>Form editor for {{vm.institution|uppercase}}</h3>
+	  <div class="panel panel-default">
+		  <div class="panel-body">
+			  <p>
+				The form editor allows institutions to modify the about and/or contact part of questionnaire.
+							  In order to modify those chapters, one need to know markdown. A help can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links" target="_blank">here</a>.
+			  </p>
+		  
+		  <div class="row">
+            <div class="col-md-9">
+				<label>About</label>
+              <textarea class="form-control" rows="3" ng-model="vm.aboutContact.about"
+                        style="min-height:100px" ng-change="vm.previewFormatting()"></textarea>
+				<label>Contact</label>
+              <textarea class="form-control" rows="3" ng-model="vm.aboutContact.contact"
+                        style="min-height:100px" ng-change="vm.previewFormatting()"></textarea>
+            </div>
+            </div>
+		  </div>
+          <div class="panel-footer">
+            <button type="button" class="btn btn-success center-block" ng-click="vm.saveAboutContact()">Save</button>
+          </div>
+		  
+		  </div>
+	  </div>
+		
+	  
+	  
+    </div>
+    <div class="col-sm-6" ng-if="vm.showPreview">
+      <h3>
+        Template preview
+        <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="vm.showPreview = !vm.showPreview"><i class="fa fa-times" aria-hidden="true"></i></button>
+
+      </h3>
+
+      <div class="panel panel-default" style="max-height: 80vh;overflow-y: auto;">
+
+        <div class="panel-body">
+          <div ng-repeat="(section_number,titles_and_templates) in vm.templates_preview">
+            <h4 ng-if="titles_and_templates.title"> {{section_number}} {{titles_and_templates.title}}</h4>
+            <p><span ng-bind-html=vm.trustAsHtml(titles_and_templates.heading)></span></p>
+			<span ng-if= "titles_and_templates.title ">
+			<p ng-repeat = "templates in titles_and_templates.templates">
+				<span ng-bind-html=vm.trustAsHtml(templates.text)></span></span>
+			</p>
+
+			<span ng-repeat="section_content in vm.templates_preview">
+
+				<span ng-if= "section_content.section_number_parent  == titles_and_templates.section_number ">
+				<p ng-repeat = "templates in section_content.templates"><span ng-bind-html=vm.trustAsHtml(templates.text)></span></p>
+				</span>
+			</span>
+            <p ><span ng-bind-html=vm.trustAsHtml(titles_and_templates.footer)></span></p>
+          </div>
+        </div>
+        <div class="panel-footer text-center">
+          <button type="button" class="btn btn-danger btn-sm" ng-click="vm.showPreview = !vm.showPreview">close
+            preview
+          </button>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

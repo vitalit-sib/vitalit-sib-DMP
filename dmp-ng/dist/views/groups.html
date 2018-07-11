@@ -17,4 +17,83 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>
 *
 *****************************************************************/
---> <div class="container-fluid" access="admin"> <h3>List of groups</h3> <div class="panel panel-default"> <div class="panel-heading"> <div class="panel-title"> Groups <button type="button" class="pull-right btn btn-primary btn-xs" ng-click="vm.createGroup()" ng-show="!vm.showNewGroup">new group</button> </div> </div> <table st-table="vm.displayedCollection" st-safe-src="vm.groups" class="table table-striped table-hover"> <thead> <tr> <th>Name <th>Institution <th>Leader <th ng-if="!vm.showNewGroup">Nb members <th ng-if="!vm.showNewGroup">Nb projects <th>  <tr ng-if="!vm.showNewGroup"> <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="search">   <tbody ng-if="vm.showNewGroup"> <tr ng-form="formNewGroup"> <th><input type="text" class="form-control input-sm" ng-model="vm.newGroup.name" required placeholder="group name"> <th><input type="text" class="form-control input-sm" ng-model="vm.newGroup.institution" required placeholder="institution"> <th><select name="leader" class="form-control input-sm" ng-model="vm.newGroup.leader_id" ng-options="user.user_id as user.firstname+&quot; &quot;+user.lastname for user in vm.users" required></select> <th><button type="button" class="btn btn-success btn-sm" ng-click="vm.createGroup()" ng-disabled="formNewGroup.$invalid">Save</button> <button type="button" class="btn btn-default btn-sm" ng-click="vm.showNewGroup = false">Cancel</button>   <tbody ng-repeat="row in vm.displayedCollection" ng-if="!vm.showNewGroup"> <tr> <td>{{row.name}} <td>{{row.institution}} <td>{{row.leader_firstname+" "+row.leader_lastname}} <td class="text-center">{{row.members.length}} <td class="text-center">{{row.projects.length}} <td><button type="button" class="btn btn-default btn-xs" ng-class="(row.showProjects)?&quot;active&quot;:&quot;&quot;" ng-show="!row.confirmDeletion" ng-click="row.showProjects=!row.showProjects">projects</button> <button type="button" class="btn btn-default btn-xs" ng-class="(row.showMembers)?&quot;active&quot;:&quot;&quot;" ng-show="!row.confirmDeletion" ng-click="row.showMembers=!row.showMembers">members</button> <button type="button" class="btn btn-info btn-xs" ng-show="!row.confirmDeletion" ng-click="vm.editGroup(row.group_id)">edit</button> <button type="button" class="btn btn-danger btn-xs" ng-show="!row.confirmDeletion" ng-click="row.confirmDeletion = true">delete</button> <button type="button" class="btn btn-danger btn-xs" ng-show="row.confirmDeletion" ng-click="vm.deleteGroup(row.group_id)">confirm</button> <a class="btn-text" ng-show="row.confirmDeletion"><span class="glyphicon glyphicon-ban-circle" ng-click="row.confirmDeletion = false"></span></a>   <tr ng-show="row.showMembers" class="well"> <td colspan="6"> <ul class="list-group"> <li class="list-group-item" ng-repeat="member in row.members"> {{member.firstname+" "+member.lastname}} <button class="pull-right btn btn-xs btn-danger" ng-show="!member.confirmRemoval" ng-click="member.confirmRemoval=true">remove</button> <a ng-href="#/user/{{member.user_id}}" class="pull-right btn btn-xs btn-info">edit</a> <a class="pull-right btn-text" ng-show="member.confirmRemoval"><span ng-click="member.confirmRemoval = false">cancel</span></a> <button class="pull-right btn btn-xs btn-danger" ng-show="member.confirmRemoval" ng-click="vm.removeMember(row.group_id,member.user_id)">confirm</button> </li> </ul>   <tr ng-show="row.showProjects" class="well"> <td colspan="6"> <ul class="list-group"> <li class="list-group-item" ng-repeat="project in vm.projects"> <div class="checkbox"> <label> <input type="checkbox" aria-label="..." ng-model="vm[&quot;project&quot;+project.project_id+&quot;group&quot;+row.group_id]" ng-checked="((row.projects|filter:{project_id:project.project_id}).length)?&quot;active&quot;:&quot;&quot;" ng-click="vm.toggleProject(row,project,this.checked)">{{project.name}} </label> </div> </li> </ul>    </table> </div> </div>
+-->
+
+<div class = 'container-fluid' access = 'admin'>
+<h3>List of groups</h3>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">
+			Groups
+			<button type = 'button' class = 'pull-right btn btn-primary btn-xs' ng-click = 'vm.createGroup()' ng-show = '!vm.showNewGroup'>new group</button>
+		</div>
+	</div>
+		<table st-table="vm.displayedCollection" st-safe-src="vm.groups" class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Institution</th>
+					<th>Leader</th>
+					<th ng-if = '!vm.showNewGroup'>Nb members</th>
+					<th ng-if = '!vm.showNewGroup'>Nb projects</th>
+					<th></th>
+				</tr>
+				<tr ng-if = '!vm.showNewGroup'>
+					<th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="search"/></th>
+				</tr>
+			</thead>
+			<tbody ng-if = 'vm.showNewGroup'>
+				<tr ng-form = 'formNewGroup'>
+					<th><input type = 'text' class = 'form-control input-sm' ng-model = 'vm.newGroup.name' required placeholder = 'group name'></th>
+					<th><input type = 'text' class = 'form-control input-sm' ng-model = 'vm.newGroup.institution' required placeholder = 'institution'></th>
+					<th><select name = 'leader' class = 'form-control input-sm' ng-model = 'vm.newGroup.leader_id' ng-options = 'user.user_id as user.firstname+" "+user.lastname for user in vm.users' required></select></th>
+					<th><button type = 'button' class = 'btn btn-success btn-sm' ng-click = 'vm.createGroup()' ng-disabled = 'formNewGroup.$invalid'>Save</button>
+					<button type = 'button' class = 'btn btn-default btn-sm' ng-click = 'vm.showNewGroup = false'>Cancel</button></th>
+				</tr>
+			</tbody>
+			<tbody ng-repeat="row in vm.displayedCollection" ng-if = '!vm.showNewGroup'>
+				<tr  >
+					<td>{{row.name}}</td>
+					<td>{{row.institution}}</td>
+					<td>{{row.leader_firstname+" "+row.leader_lastname}}</td>
+					<td class = 'text-center'>{{row.members.length}}</td>
+					<td class = 'text-center'>{{row.projects.length}}</td>
+					<td><button type = 'button' class = 'btn btn-default btn-xs' ng-class = '(row.showProjects)?"active":""' ng-show = '!row.confirmDeletion' ng-click = 'row.showProjects=!row.showProjects'>projects</button>
+						<button type = 'button' class = 'btn btn-default btn-xs' ng-class = '(row.showMembers)?"active":""' ng-show = '!row.confirmDeletion' ng-click = 'row.showMembers=!row.showMembers'>members</button>
+						<button type = 'button' class = 'btn btn-info btn-xs' ng-show = '!row.confirmDeletion' ng-click = 'vm.editGroup(row.group_id)'>edit</button>
+						<button type = 'button' class = 'btn btn-danger btn-xs' ng-show = '!row.confirmDeletion' ng-click = 'row.confirmDeletion = true'>delete</button>
+						<button type = 'button' class = 'btn btn-danger btn-xs' ng-show = 'row.confirmDeletion' ng-click = 'vm.deleteGroup(row.group_id)'>confirm</button>
+						<a class = 'btn-text' ng-show = 'row.confirmDeletion'><span class = 'glyphicon glyphicon-ban-circle' ng-click = 'row.confirmDeletion = false'></span></a>
+					</td>
+				</tr>
+				<tr ng-show = 'row.showMembers' class = 'well'>
+					<td colspan = '6'>
+						<ul class="list-group">
+						  <li class="list-group-item" ng-repeat = 'member in row.members'>
+							  {{member.firstname+" "+member.lastname}}
+							  <button class = 'pull-right btn btn-xs btn-danger' ng-show = '!member.confirmRemoval' ng-click = 'member.confirmRemoval=true'>remove</button>
+							  <a ng-href = '#/user/{{member.user_id}}' class = 'pull-right btn btn-xs btn-info' >edit</a>
+							  <a class = 'pull-right btn-text' ng-show = 'member.confirmRemoval'><span ng-click = 'member.confirmRemoval = false'>cancel</span></a>
+							  <button class = 'pull-right btn btn-xs btn-danger' ng-show = 'member.confirmRemoval' ng-click = 'vm.removeMember(row.group_id,member.user_id)'>confirm</button>
+
+						  </li>
+						</ul>
+					</td>
+				</tr>
+				<tr ng-show = 'row.showProjects' class = 'well'>
+					<td colspan = '6'>
+						<ul class="list-group">
+							<li class="list-group-item" ng-repeat = 'project in vm.projects'>
+								<div class="checkbox">
+							      <label>
+							        <input type="checkbox" aria-label="..." ng-model = 'vm["project"+project.project_id+"group"+row.group_id]' ng-checked = '((row.projects|filter:{project_id:project.project_id}).length)?"active":""' ng-click = 'vm.toggleProject(row,project,this.checked)'>{{project.name}}
+							      </label>
+							    </div>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,1 +1,36 @@
-<ul class="pagination" ng-if="pages.length >= 2" style="margin-bottom: -5px;margin-top: 0px"> <li ng-if="currentPage > 1"> <a ng-click="selectPage(1)">&lt;&lt;</a> </li> <li ng-if="currentPage > 1"> <a ng-click="selectPage(currentPage-1)">&lt;</a> </li> <li ng-repeat="page in pages" ng-class="{active: page==currentPage}"><a ng-click="selectPage(page)">{{page}}</a> </li> <li ng-if="currentPage < numPages"><a ng-click="selectPage(currentPage+1)">></a> </li> <li ng-if="currentPage < numPages"> <a ng-click="selectPage(numPages)">>></a> </li> </ul>
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <DMP Canvas Generator web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+<ul class="pagination" ng-if="pages.length >= 2" style="margin-bottom: -5px;margin-top: 0px">
+
+	<li ng-if="currentPage > 1">
+		<a ng-click="selectPage(1)">&lt;&lt;</a>
+	</li>
+	<li ng-if="currentPage > 1">
+		<a ng-click="selectPage(currentPage-1)">&lt;</a>
+	</li>
+	<li ng-repeat="page in pages" ng-class="{active: page==currentPage}"><a ng-click="selectPage(page)">{{page}}</a>
+	</li>
+	<li ng-if="currentPage < numPages"><a ng-click="selectPage(currentPage+1)">></a>
+	</li>
+	<li ng-if="currentPage < numPages">
+		<a ng-click="selectPage(numPages)">>></a>
+	</li>
+</ul>

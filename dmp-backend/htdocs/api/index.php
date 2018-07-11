@@ -190,7 +190,7 @@ $app->post('/resetpass', function ($request,$response) {
 $app->post('/authenticate', function ($request,$response) {
 	require 'user.php';
 	$user = $request->getParsedBody();
-	$login = ldap_login($user);
+	$login = loginGitHub($user);
 	return 	$response = $response->withJson($login);
 });
 

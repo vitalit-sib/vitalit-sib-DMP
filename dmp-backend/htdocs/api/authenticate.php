@@ -2,6 +2,9 @@
 require '../vendor/autoload.php';
 require '../../tools/include.php';
 require 'user.php';
+
+// Remarks: the SWITCHaai login is domain name dependent. In order to use the SWITCHaai login the web application domain needs to be registered at SWITCH (https://www.switch.ch/aai/).
+
 function switchaai_login(){
 	$user = array();
 	if (isset($_SERVER['Shib-Identity-Provider'])){

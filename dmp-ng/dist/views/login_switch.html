@@ -17,7 +17,20 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>
 *
 *****************************************************************/
---> <div class="container"> <h3>Welcome to the {{vm.siteTitle}} platform</h3> <div class="panel panel-default" style="margin-top: 50px"> <div class="panel-heading"> <div class="panel-title">Login with SwitchAAI</div> </div> <div class="panel-body" style="min-height: 200px"> <div id="switchAAIForm" style="position: absolute"></div> <!-- EMBEDDED-WAYF-START --> <script type="text/javascript">// To use this JavaScript, please access:
+-->
+
+<div class = 'container'>
+	<h3>Welcome to the {{vm.siteTitle}} platform</h3>
+	<div class = 'panel panel-default' style = 'margin-top: 50px;'>
+		<div class = 'panel-heading'>
+			<div class = 'panel-title'>Login with SwitchAAI</div>
+		</div>
+		<div class = 'panel-body' style = 'min-height: 200px;'>
+				<div id = 'switchAAIForm' style = 'position: absolute;'></div>
+				<!-- EMBEDDED-WAYF-START -->
+				<script type="text/javascript"><!--
+
+				// To use this JavaScript, please access:
 				// https://wayf.switch.ch/SWITCHaai/WAYF/embedded-wayf.js/snippet.html
 				// and copy/paste the resulting HTML snippet to an unprotected web page that
 				// you want the embedded WAYF to be displayed
@@ -334,4 +347,29 @@
 				// #wayf_submit_button           - Submit button
 				//
 				// Use these CSS IDs carefully and at own risk because future updates could
-				// interfere with the rules you created and the IDs may change without notice!</script> <script type="text/javascript" src="scripts/embedded-wayf.2c4bd335.js"></script> <noscript><!-- Fallback to Shibboleth DS Session Initiator for non-JavaScript users Value of the target GET parameter should be set to an URL-encoded absolute URL that points to a Shibboleth protected web page where the user is logged in into your application. --> <p> <strong>Login:</strong> Javascript is not enabled for your web browser. Please use the <a href="/Shibboleth.sso/DS?target=https%3A%2F%2Fdmp.vital-it.ch%2F">non-Javascript Login</a>. </p></noscript> <!-- EMBEDDED-WAYF-END --> </div> </div> </div>
+				// interfere with the rules you created and the IDs may change without notice!
+
+
+				//-->
+				</script>
+
+				<script type="text/javascript" src="scripts/embedded-wayf.js"></script>
+
+				<noscript>
+				  <!--
+				  Fallback to Shibboleth DS Session Initiator for non-JavaScript users
+				  Value of the target GET parameter should be set to an URL-encoded
+				  absolute URL that points to a Shibboleth protected web page where the user
+				  is logged in into your application.
+				  -->
+				  <p>
+				    <strong>Login:</strong> Javascript is not enabled for your web browser. Please use the <a href="/Shibboleth.sso/DS?target=https%3A%2F%2Fdmp.vital-it.ch%2F">non-Javascript Login</a>.
+				  </p>
+				</noscript>
+
+				<!-- EMBEDDED-WAYF-END -->
+
+
+		</div>
+	</div>
+</div>

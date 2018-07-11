@@ -17,4 +17,51 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>
 *
 *****************************************************************/
---> <div class="container"> <form novalidate name="formInfo" ng-submit="vm.submitNews()" class="form-horizontal"> <div class="panel panel-default"> <div class="panel-heading"> <input type="text" class="form-control" placeholder="news title" ng-model="vm.info.title" required> </div> <div class="panel-body"> <textarea ui-tinymce ng-model="vm.info.content"></textarea> <div style="margin-top: 20px"> <div class="form-group"> <label class="col-sm-4">(optional) expiration date</label> <p class="input-group col-sm-4"> <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="vm.info.expiration_date" is-open="vm.status.opened" min-date="vm.minDate" close-text="Close"> <span class="input-group-btn"> <button type="button" class="btn btn-default" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button> </span> </p> </div> </div> </div> <div class="panel-footer"> <div class="row"> <div class="checkbox col-sm-5"> <label access="admin"><input type="checkbox" ng-model="vm.info.is_active" ng-true-value="&quot;Y&quot;" ng-false-value="&quot;N&quot;"> is published</label> <label><input type="checkbox" ng-model="vm.info.newsletter" ng-true-value="&quot;Y&quot;" ng-false-value="&quot;N&quot;"> is sent as a newsletter</label> </div> <div class="col-sm-7"> <div ng-if="!vm.info.confirmDelete"> <button type="submit" class="btn btn-success btn-sm" ng-disabled="formInfo.$invalid">Submit</button> <button type="delete" class="btn btn-danger btn-sm" ng-click="vm.deleteNews()" ng-if="vm.info.news_id > 0">Delete</button> <a href="#/news" class="btn btn-link btn-sm">Cancel</a> </div> <div ng-if="vm.info.confirmDelete"> <button type="button" class="btn btn-danger btn-sm" ng-click="vm.deleteNews()">Confirm</button> <a ng-click="vm.info.confirmDelete = false" class="btn btn-link btn-sm">Cancel</a> </div> </div> </div> </div> </div> </form> </div>
+-->
+
+<div class = 'container'>
+	<form novalidate name = 'formInfo' ng-submit = 'vm.submitNews()' class = 'form-horizontal'>
+		<div class = 'panel panel-default'>
+			<div class = 'panel-heading'>
+				<input type = 'text' class = 'form-control' placeholder = 'news title' ng-model = 'vm.info.title' required>
+			</div>
+			<div class = 'panel-body'>
+				<textarea ui-tinymce ng-model="vm.info.content"></textarea>
+				<div style = 'margin-top: 20px;'>
+					<div class = 'form-group'>
+						<label class = 'col-sm-4'>(optional) expiration date</label>
+						<p class="input-group col-sm-4">
+							<input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="vm.info.expiration_date" is-open="vm.status.opened" min-date="vm.minDate"  close-text="Close" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						</p>
+					</div>
+
+				</div>
+			</div>
+			<div class = 'panel-footer'>
+				<div class = 'row'>
+					<div class = 'checkbox col-sm-5'>
+						<label access = 'admin'><input type = 'checkbox' ng-model = 'vm.info.is_active' ng-true-value = '"Y"' ng-false-value = '"N"'> is published</label>
+						
+						<label><input type = 'checkbox' ng-model = 'vm.info.newsletter' ng-true-value = '"Y"' ng-false-value = '"N"'> is sent as a newsletter</label>
+					</div>
+					<div class = 'col-sm-7'>
+						<div ng-if = '!vm.info.confirmDelete'>
+							<button type = 'submit' class = 'btn btn-success btn-sm' ng-disabled = 'formInfo.$invalid'>Submit</button>
+							<button type = 'delete' class = 'btn btn-danger btn-sm' ng-click = 'vm.deleteNews()' ng-if = 'vm.info.news_id > 0'>Delete</button>
+							<a href="#/news" class="btn btn-link btn-sm">Cancel</a>
+						</div>
+						<div ng-if = 'vm.info.confirmDelete'>
+							<button type = 'button' class = 'btn btn-danger btn-sm' ng-click = 'vm.deleteNews()'>Confirm</button>
+							<a ng-click = 'vm.info.confirmDelete = false' class="btn btn-link btn-sm">Cancel</a>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
